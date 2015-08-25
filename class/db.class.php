@@ -46,7 +46,7 @@ class Database extends Mysqli {
 	 */
 	public function isAdmin($userId) {
 
-		if ($this->getUserType ( $userId ) == 1) {
+		if ($this->getUserType ( $userId ) == 2) {
 			return true;
 		}
 		return false;

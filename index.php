@@ -1,10 +1,12 @@
 <?php
 ini_set ( 'display_errors', '1' );
 define ( "DEBUG", 0 );
+define ("GODMODE", 1);
 
 /**
  * Constants
  */
+
 define ( "PROJECT_ROOT", "/lablet" );
 
 require 'class/db.class.php';
