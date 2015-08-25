@@ -210,6 +210,23 @@ class Database extends Mysqli {
 	}
 
 	/**
+	 * Updates the groups name and description
+	 *
+	 * @param int $groupId        	
+	 * @param string $name        	
+	 * @param string $description        	
+	 * @return mixed
+	 */
+	public function updateGroupSettings($groupId, $name, $description) {
+
+		$query = "UPDATE groups SET name = '{$name}', description = '{$description}' WHERE id = {$groupId};";
+		$result = $this->query ( $query );
+		
+		return $result;
+	
+	}
+
+	/**
 	 * Removes a user from database
 	 *
 	 * @param int $userId        	

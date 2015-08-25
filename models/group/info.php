@@ -1,11 +1,25 @@
 <?php
 global $db;
+global $helper;
 $GLOBALS ["targetId"] = $targetId;
 
-if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'deleteGroup') {
-	$db->deleteGroup ( $GLOBALS ["targetId"] );
+$error = false;
+if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateGroupSettings") {
 	
-	header ( "Location: {PROJECT_ROOT}/group/overview" );
+	if (! isset ( $_POST ["groupName"] )) {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ["groupDescription"] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$db->updateGroupSettings ( $targetId, $_POST ["groupName"], $_POST ["groupDescription"] );
+		
+		$helper->redirectToSelf ();
+	}
+
 }
 
 /**

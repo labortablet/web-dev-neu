@@ -3,6 +3,28 @@ $GLOBALS ["targetId"] = $targetId;
 global $db;
 global $helper;
 
+if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateUserSettings") {
+	
+	$error = false;
+	if (! isset ( $_POST ["userFirstName"] )) {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ["userLastName"] )) {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ["userType"] ) || is_int ( $_POST ["userType"] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$db->updateUserSettings ( $targetId, $_POST ["userFirstName"], $_POST ["userLastName"], $_POST ["userType"] );
+		
+		$helper->redirectToSelf ();
+	}
+}
+
 /**
  * Get the current user
  */
@@ -32,28 +54,4 @@ function getProjects() {
 	return $db->getProjectsByGroup ( $GLOBALS ["targetId"] );
 
 }
-
-if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateUserSettings") {
-	
-	$error = false;
-	if (! isset ( $_POST ["userFirstName"] )) {
-		$error = true;
-	}
-	
-	if (! isset ( $_POST ["userLastName"] )) {
-		$error = true;
-	}
-	
-	if (! isset ( $_POST ["userType"] ) || is_int ( $_POST ["userType"] )) {
-		$error = true;
-	}
-	
-	if (! $error) {
-		$db->updateUserSettings ( $targetId, $_POST ["userFirstName"], $_POST ["userLastName"], $_POST ["userType"] );
-		
-		// Redirect to self to prevent
-		$helper->redirectToSelf ();
-	}
-}
-
 ?>

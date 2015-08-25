@@ -4,7 +4,7 @@ $users = getUsers ();
 $projects = getProjects ();
 
 $usersNotInGroup = getUsersNotInGroup ();
-$projectsNotInGroup = projectsNotInGroup();
+$projectsNotInGroup = projectsNotInGroup ();
 ?>
 <div
 	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
@@ -21,6 +21,31 @@ $projectsNotInGroup = projectsNotInGroup();
 						Group</a></td>
 			</tr>
 		</table>
+		<h2>Edit</h2>
+		<form action="" method="POST">
+			<input type="hidden" name="action" value="updateGroupSettings" />
+			<table border="1" style="width: 100%;"
+				class="table-striped table-hover">
+				<tr>
+					<th style="padding: 3px; width: 50%;">Name</th>
+					<td style="padding: 3px;"><input class="form-control"
+						name="groupName" type="text"
+						value="<?php echo "{$group['name']}"; ?>" /></td>
+				</tr>
+				<tr>
+					<th style="padding: 3px; width: 50%;">Description</th>
+					<td style="padding: 3px;"><textarea name="groupDescription"
+							class="form-control" rows="3">
+<?php echo "{$group['description']}"; ?>
+</textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="padding: 3px;"><input
+						class="btn btn-primary" type="submit" style="width: 100%;"
+						value="Save settings" /></td>
+				</tr>
+			</table>
+		</form>
 		<h2><?php echo count($users); ?> group members</h2>
 		<table border="1" style="width: 100%;"
 			class="rowlink table-striped table-hover">
