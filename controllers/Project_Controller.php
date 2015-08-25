@@ -9,6 +9,8 @@
  */
 class Project_Controller extends Controller {
 
+	protected $defaultMethod = "my";
+
 	function __construct() {
 
 		parent::__construct ();

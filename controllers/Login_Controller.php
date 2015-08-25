@@ -9,6 +9,8 @@
  */
 class Login_Controller extends Controller {
 
+	protected $defaultMethod = "login";
+
 	function __construct() {
 
 		parent::__construct ();

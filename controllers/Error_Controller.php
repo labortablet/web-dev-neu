@@ -2,7 +2,7 @@
 
 /**
  * TODO wird gar nicht benutzt
- * 
+ *
  * @author Andre Beging
  *        
  */

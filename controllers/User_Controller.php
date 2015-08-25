@@ -8,6 +8,8 @@
  *        
  */
 class User_Controller extends Controller {
+	
+	protected $defaultMethod = "profile";
 
 	function __construct() {
 

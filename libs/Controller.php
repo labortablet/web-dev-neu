@@ -20,10 +20,14 @@ class Controller {
 
 	public function __call($name, $args) {
 
-		if (DEBUG === 1) {
-			trigger_error ( "Missing Method: " . $name . "()", E_USER_NOTICE );
+		if (! method_exists ( $this, $this->defaultMethod )) {
+			header ( "Location: " . PROJECT_ROOT );
 		}
-		return true;
+		
+		call_user_func_array ( [ 
+				$this,
+				$this->defaultMethod 
+		], $args );
 	
 	}
 
