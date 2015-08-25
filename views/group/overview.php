@@ -12,7 +12,6 @@ $groups = getGroups ();
 				<th style="padding: 3px;">Users</th>
 				<th style="padding: 3px;">Projects</th>
 				<th style="padding: 3px;">Modified</th>
-				<th style="padding: 3px;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,12 +24,6 @@ $groups = getGroups ();
 				<td style="padding: 3px;"><?php echo $g["users"]; ?></td>
 				<td style="padding: 3px;"><?php echo $g["projects"]; ?></td>
 				<td style="padding: 3px;"><?php echo $g["create_date"]; ?></td>
-				<td style="padding: 3px; width: 5px; white-space: nowrap;"><a
-					class="btn btn-primary disabled"
-					href="<?php echo PROJECT_ROOT.""; ?>">Edit</a> <a
-					class="btn btn-danger"
-					href="<?php echo PROJECT_ROOT."/group/delete/{$g['id']}"; ?>">Delete</a>
-				</td>
 			</tr>
         <?php
 								endforeach

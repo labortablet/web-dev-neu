@@ -13,8 +13,17 @@ $projectsNotInGroup = projectsNotInGroup();
 	<hr />
 	<div
 		style="margin-left: auto; margin-right: auto; width: 100%; max-width: 400px;">
+		<table border="0" style="width: 100%;" class="">
+			<tr>
+				<td style="width: 100%; padding: 10px;"><a class="btn btn-danger"
+					style="width: 100%;"
+					href="<?php echo PROJECT_ROOT."/group/delete/{$group['id']}"; ?>">Delete
+						Group</a></td>
+			</tr>
+		</table>
 		<h2><?php echo count($users); ?> group members</h2>
-		<table border="1" style="width: 100%;" class="rowlink table-striped table-hover">
+		<table border="1" style="width: 100%;"
+			class="rowlink table-striped table-hover">
 			<tr>
 				<th style="padding: 3px;">ID</th>
 				<th style="padding: 3px;">Name</th>
@@ -38,15 +47,20 @@ $projectsNotInGroup = projectsNotInGroup();
 	    </table>
 		<table border="1" style="width: 100%;">
 			<tr>
-				<form action="<?php echo PROJECT_ROOT."/group/adduser/{$group['id']}"; ?>" method="POST">
-				<input type="hidden" name="action" value="addUser" />
-				<td style="padding: 3px;"><select name="userId"class="form-control" required>
-						<option></option>
+				<form
+					action="<?php echo PROJECT_ROOT."/group/adduser/{$group['id']}"; ?>"
+					method="POST">
+					<input type="hidden" name="action" value="addUser" />
+					<td style="padding: 3px;"><select name="userId"
+						class="form-control" required>
+							<option></option>
 						<?php foreach($usersNotInGroup as $u):?>
 						<option value="<?php echo $u['id']; ?>"><?php echo "{$u['firstname']} {$u['lastname']} (ID {$u['id']})"; ?></option>
 						<?php endforeach; ?>
 					</select></td>
-				<td style="padding: 3px; width: 1px;"><input type="submit" value="Add User" class="btn btn-success" />
+					<td style="padding: 3px; width: 1px;"><input type="submit"
+						value="Add User" class="btn btn-success" />
+				
 				</form>
 			</tr>
 		</table>
@@ -76,18 +90,22 @@ $projectsNotInGroup = projectsNotInGroup();
 									;
 									?>
 	    </table>
-	    		<table border="1" style="width: 100%;">
+		<table border="1" style="width: 100%;">
 			<tr>
-				<form action="<?php echo PROJECT_ROOT."/group/addproject/{$group['id']}"; ?>" method="POST">
-				<input type="hidden" name="action" value="addProject" />
-				<td style="padding: 3px;"><select name="projectId"class="form-control" required>
-						<option></option>
+				<form
+					action="<?php echo PROJECT_ROOT."/group/addproject/{$group['id']}"; ?>"
+					method="POST">
+					<input type="hidden" name="action" value="addProject" />
+					<td style="padding: 3px;"><select name="projectId"
+						class="form-control" required>
+							<option></option>
 						<?php foreach($projectsNotInGroup as $p):?>
 						<option value="<?php echo $p['id']; ?>"><?php echo "{$p['name']} (ID {$p['id']})"; ?></option>
 						<?php endforeach; ?>
 					</select></td>
-				<td style="padding: 3px; width: 1px;"><input type="submit" value="Add Project" class="btn btn-success" />
-				</td></form>
+					<td style="padding: 3px; width: 1px;"><input type="submit"
+						value="Add Project" class="btn btn-success" /></td>
+				</form>
 			</tr>
 		</table>
 

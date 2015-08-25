@@ -23,7 +23,7 @@ global $db;
 					href="<?php echo PROJECT_ROOT."/user/delete/{$user['id']}"; ?>">Delete</a></td>
 			</tr>
 		</table>
-		<h2>Settings</h2>
+		<h2>Edit</h2>
 		<form action="" method="POST">
 		<input type="hidden" name="action" value="updateUserSettings" />
 			<table border="1" style="width: 100%;"

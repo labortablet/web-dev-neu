@@ -11,7 +11,6 @@ $projects = getProjects ();
 				<th style="padding: 3px;">Name</th>
 				<th style="padding: 3px;">In Groups</th>
 				<th style="padding: 3px;">Modified</th>
-				<th style="padding: 3px;"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,12 +22,6 @@ $projects = getProjects ();
 				<td style="padding: 3px;"><?php echo $p["name"]; ?></td>
 				<td style="padding: 3px;"><?php echo $p["groups"]; ?></td>
 				<td style="padding: 3px;"><?php echo $p["create_date"]; ?></td>
-				<td style="padding: 3px; width: 5px; white-space: nowrap;"><a
-					class="btn btn-primary disabled"
-					href="<?php echo PROJECT_ROOT.""; ?>">Edit</a> <a
-					class="btn btn-danger disabled"
-					href="<?php echo PROJECT_ROOT.""; ?>">Delete</a>
-				</td>
 			</tr>
         <?php
 								endforeach
