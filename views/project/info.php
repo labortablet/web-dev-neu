@@ -17,6 +17,31 @@ $groups = getGroups ();
 						Project</a></td>
 			</tr>
 		</table>
+		<h2>Edit</h2>
+		<form action="" method="POST">
+			<input type="hidden" name="action" value="updateProjectSettings" />
+			<table border="1" style="width: 100%;"
+				class="table-striped table-hover">
+				<tr>
+					<th style="padding: 3px; width: 50%;">Name</th>
+					<td style="padding: 3px;"><input class="form-control"
+						name="projectName" type="text"
+						value="<?php echo "{$project['name']}"; ?>" /></td>
+				</tr>
+				<tr>
+					<th style="padding: 3px; width: 50%;">Description</th>
+					<td style="padding: 3px;"><textarea name="projectDescription"
+							class="form-control" rows="3">
+<?php echo "{$project['description']}"; ?>
+</textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="padding: 3px;"><input
+						class="btn btn-primary" type="submit" style="width: 100%;"
+						value="Save settings" /></td>
+				</tr>
+			</table>
+		</form>
 		<h2><?php echo count($groups); ?> assigned groups</h2>
 		<table border="1" style="width: 100%;"
 			class="rowlink table-striped table-hover">

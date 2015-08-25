@@ -227,6 +227,23 @@ class Database extends Mysqli {
 	}
 
 	/**
+	 * Updates the projects name and description
+	 *
+	 * @param int $projectId        	
+	 * @param string $name        	
+	 * @param string $description        	
+	 * @return mixed
+	 */
+	public function updateProjectSettings($projectId, $name, $description) {
+
+		$query = "UPDATE projects SET name = '{$name}', description = '{$description}' WHERE id = {$projectId};";
+		$result = $this->query ( $query );
+		
+		return $result;
+	
+	}
+
+	/**
 	 * Removes a user from database
 	 *
 	 * @param int $userId        	

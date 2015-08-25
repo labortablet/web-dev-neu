@@ -1,6 +1,26 @@
 <?php
-
+global $db;
+global $helper;
 $GLOBALS ["targetId"] = $targetId;
+
+$error = false;
+if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateProjectSettings") {
+	
+	if (! isset ( $_POST ["projectName"] )) {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ["projectDescription"] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$db->updateProjectSettings ( $targetId, $_POST ["projectName"], $_POST ["projectDescription"] );
+		
+		$helper->redirectToSelf ();
+	}
+
+}
 
 /**
  * Get the current project
