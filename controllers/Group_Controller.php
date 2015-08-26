@@ -29,6 +29,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function overview() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		require 'models/group/overview.php';
 		if (file_exists ( "views/group/overview.php" )) {
@@ -38,6 +42,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function create() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		require 'models/group/create.php';
 		if (file_exists ( "views/group/create.php" )) {
@@ -56,6 +64,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function info() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$args = func_get_args ();
 		$targetId = null;
@@ -76,6 +88,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function delete() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$args = func_get_args ();
 		$targetId = null;
@@ -96,6 +112,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function removeUser() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$args = func_get_args ();
 		$targetGroup = null;
@@ -121,6 +141,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function removeProject() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$args = func_get_args ();
 		$targetGroup = null;
@@ -146,6 +170,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function addUser() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$args = func_get_args ();
 		$targetId = null;
@@ -164,6 +192,10 @@ class Group_Controller extends Controller {
 	}
 
 	public function addProject() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$args = func_get_args ();
 		$targetId = null;

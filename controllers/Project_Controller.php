@@ -29,6 +29,10 @@ class Project_Controller extends Controller {
 	}
 
 	public function overview() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		require 'models/project/overview.php';
 		if (file_exists ( "views/project/overview.php" )) {
@@ -38,6 +42,10 @@ class Project_Controller extends Controller {
 	}
 
 	public function create() {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		require 'models/group/create.php';
 		if (file_exists ( "views/group/create.php" )) {
@@ -47,6 +55,10 @@ class Project_Controller extends Controller {
 	}
 
 	public function info($args = null) {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$targetId = ( int ) $args;
 		
@@ -61,6 +73,10 @@ class Project_Controller extends Controller {
 	}
 
 	public function delete($args = null) {
+		
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
 
 		$targetId = ( int ) $args;
 		

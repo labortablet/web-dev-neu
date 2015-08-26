@@ -7,8 +7,18 @@
  *        
  */
 class Controller {
+	
+	protected $isAdmin = false;
 
 	function __construct() {
+		
+		global $self;
+		global $db;
+		
+		$this->isAdmin = $db->isAdmin($self["id"]);
+		if(GODMODE) {
+			$this->isAdmin = true;
+		}
 
 		if (DEBUG === 1) {
 			var_dump ( "Inside " . get_class () );
@@ -17,7 +27,7 @@ class Controller {
 		$this->view = new View ();
 	
 	}
-
+	
 	public function __call($name, $args) {
 
 		if (! method_exists ( $this, $this->defaultMethod )) {

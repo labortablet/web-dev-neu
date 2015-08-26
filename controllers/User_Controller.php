@@ -8,7 +8,7 @@
  *        
  */
 class User_Controller extends Controller {
-	
+
 	protected $defaultMethod = "profile";
 
 	function __construct() {
@@ -30,6 +30,10 @@ class User_Controller extends Controller {
 
 	public function overview() {
 
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
+		
 		require 'models/user/overview.php';
 		if (file_exists ( "views/user/overview.php" )) {
 			$this->view->render ( "user/overview" );
@@ -39,6 +43,10 @@ class User_Controller extends Controller {
 
 	public function newuser() {
 
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
+		
 		require 'models/user/newuser.php';
 		if (file_exists ( "views/user/newuser.php" )) {
 			$this->view->render ( "user/newuser" );
@@ -48,6 +56,10 @@ class User_Controller extends Controller {
 
 	public function info($args = null) {
 
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
+		
 		$targetId = ( int ) $args;
 		
 		if ($targetId == null) {
@@ -71,6 +83,10 @@ class User_Controller extends Controller {
 
 	public function delete($args = null) {
 
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
+		
 		$targetId = ( int ) $args;
 		
 		if ($targetId == null) {
@@ -85,6 +101,10 @@ class User_Controller extends Controller {
 
 	public function changepassword($args = null) {
 
+		if (! $this->isAdmin) {
+			return $this->__call ( $this->defaultMethod, array () );
+		}
+		
 		$targetId = ( int ) $args;
 		
 		if ($targetId == null) {

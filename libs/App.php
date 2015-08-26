@@ -9,10 +9,10 @@
 class App {
 
 	protected $controller = 'User_Controller'; // default controller
-	protected $method = 'overview';
+	protected $method = '';
 
 	protected $params = [ ];
-
+	
 	function __construct() {
 
 		global $self;

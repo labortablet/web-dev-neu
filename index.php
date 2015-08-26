@@ -1,8 +1,8 @@
 <?php
 header ( "Content-Type: text/html; charset=utf-8" );
 ini_set ( 'display_errors', '1' );
-define ( "DEBUG", 0 );
-define ( "GODMODE", 1 );
+define ( "DEBUG", 0 ); // echoes some debug information
+define ( "GODMODE", 1 ); // Every user is admin
 
 /**
  * Constants
