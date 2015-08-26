@@ -639,6 +639,8 @@ class Database extends Mysqli {
 	 *
 	 * @param int $userId        	
 	 * @return multitype:
+	 * 
+	 * TODO hier scheint nicht alles so zu funktionieren, wie es sollte
 	 */
 	public function getProjectsByUser($userId) {
 
@@ -677,6 +679,32 @@ class Database extends Mysqli {
 		$query = "
 			INSERT INTO `groups` (`id`, `name`, `description`, `create_date`)
 				VALUES (NULL, '{$name}', '{$description}', CURRENT_TIMESTAMP);
+		";
+		
+		if ($stmt = $this->prepare ( $query )) {
+			$stmt->execute ();
+			
+			if ($this->error == '') {
+				return $stmt->insert_id;
+			}
+			else {
+				return $this->error;
+			}
+		}
+	
+	}
+
+	/**
+	 * Create a new project
+	 *
+	 * @param string $name        	
+	 * @param string $description        	
+	 */
+	public function createProject($name, $description) {
+
+		$query = "
+		INSERT INTO `projects` (`id`, `name`, `description`, `create_date`)
+		VALUES (NULL, '{$name}', '{$description}', CURRENT_TIMESTAMP);
 		";
 		
 		if ($stmt = $this->prepare ( $query )) {

@@ -47,9 +47,9 @@ class Project_Controller extends Controller {
 			return $this->__call ( $this->defaultMethod, array () );
 		}
 		
-		require 'models/group/create.php';
-		if (file_exists ( "views/group/create.php" )) {
-			$this->view->render ( "group/create" );
+		require 'models/project/create.php';
+		if (file_exists ( "views/project/create.php" )) {
+			$this->view->render ( "project/create" );
 		}
 	
 	}
