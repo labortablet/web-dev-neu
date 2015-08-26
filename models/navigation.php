@@ -9,10 +9,10 @@ $separator = new NavSeparator ();
 $dropDown = new NavBarDropDown ( "Users" );
 $dropDown->addItem ( new NavBarItem ( "My Profile", PROJECT_ROOT . "/user/profile", "" ) );
 if (isAdmin () || GODMODE) {
-$dropDown->addItem ( $separator );
-$dropDown->addItem ( new NavHeader ( "Admin" ) );
-$dropDown->addItem ( new NavBarItem ( "All User", PROJECT_ROOT . "/user/overview", "" ) );
-$dropDown->addItem ( new NavBarItem ( "New User", PROJECT_ROOT . "/user/newuser", "" ) );
+	$dropDown->addItem ( $separator );
+	$dropDown->addItem ( new NavHeader ( "Admin" ) );
+	$dropDown->addItem ( new NavBarItem ( "All User", PROJECT_ROOT . "/user/overview", "" ) );
+	$dropDown->addItem ( new NavBarItem ( "New User", PROJECT_ROOT . "/user/newuser", "" ) );
 }
 $nav->addItem ( $dropDown );
 

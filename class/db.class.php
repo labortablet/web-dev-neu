@@ -306,6 +306,21 @@ class Database extends Mysqli {
 	}
 
 	/**
+	 * Deletes a project from the database
+	 *
+	 * @param int $projectId        	
+	 * @return mixed
+	 */
+	public function deleteProject($projectId) {
+
+		$query = "DELETE FROM projects WHERE id = {$projectId};";
+		$result = $this->query ( $query );
+		
+		return $result;
+	
+	}
+
+	/**
 	 * Adds a user to a group
 	 *
 	 * @param int $groupId        	

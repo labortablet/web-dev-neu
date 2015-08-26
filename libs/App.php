@@ -12,7 +12,7 @@ class App {
 	protected $method = '';
 
 	protected $params = [ ];
-	
+
 	function __construct() {
 
 		global $self;
