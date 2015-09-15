@@ -4,9 +4,9 @@
 // define ( 'DB_PASS', 'enemenemiste' );
 // define ( 'DB_NAME', 'db1188164-lablet' );
 define ( 'DB_HOST', 'localhost' );
-define ( 'DB_USER', 'root' );
-define ( 'DB_PASS', '' );
-define ( 'DB_NAME', 'lablet' );
+define ( 'DB_USER', 'lablet' );
+define ( 'DB_PASS', 'SlampEr9hailNum' );
+define ( 'DB_NAME', 'lablet_tabletprojectdb' );
 
 /**
  * Controls database connection and operations
@@ -89,6 +89,9 @@ class Database extends Mysqli {
 	 * @return int userType
 	 */
 	public function getUserType($userId) {
+		if(!$userId) {
+			return null;
+		}
 
 		$query = "SELECT type FROM users WHERE id = {$userId}";
 		$result = $this->query ( $query );
@@ -638,9 +641,7 @@ class Database extends Mysqli {
 	 * Gets project that the given user is assigned with (via group)
 	 *
 	 * @param int $userId        	
-	 * @return multitype:
-	 * 
-	 * TODO hier scheint nicht alles so zu funktionieren, wie es sollte
+	 * @return multitype: TODO hier scheint nicht alles so zu funktionieren, wie es sollte
 	 */
 	public function getProjectsByUser($userId) {
 
