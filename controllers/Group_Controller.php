@@ -21,13 +21,6 @@ class Group_Controller extends Controller {
 	
 	}
 
-	public function test($args = false) {
-
-		echo "test func";
-		var_dump ( $args );
-	
-	}
-
 	public function overview() {
 
 		if (! $this->isAdmin) {

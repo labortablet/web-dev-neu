@@ -5,7 +5,7 @@
  */
 function getGroups() {
 
-	$db = new Database ();
+	global $db;
 	return $db->getGroups ();
 
 }

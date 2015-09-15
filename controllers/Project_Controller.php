@@ -21,10 +21,12 @@ class Project_Controller extends Controller {
 	
 	}
 
-	public function test($args = false) {
+	public function my() {
 
-		echo "test func";
-		var_dump ( $args );
+		require 'models/project/my.php';
+		if (file_exists ( "views/project/my.php" )) {
+			$this->view->render ( "project/my" );
+		}
 	
 	}
 

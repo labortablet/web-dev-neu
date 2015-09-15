@@ -1,12 +1,4 @@
 <?php
-// define ( 'DB_HOST', 'troogs.de' );
-// define ( 'DB_USER', 'db1188164-lable' );
-// define ( 'DB_PASS', 'enemenemiste' );
-// define ( 'DB_NAME', 'db1188164-lablet' );
-define ( 'DB_HOST', 'localhost' );
-define ( 'DB_USER', 'lablet' );
-define ( 'DB_PASS', 'SlampEr9hailNum' );
-define ( 'DB_NAME', 'lablet_tabletprojectdb' );
 
 /**
  * Controls database connection and operations
@@ -18,7 +10,7 @@ class Database extends Mysqli {
 
 	public function __construct() {
 
-		parent::__construct ( DB_HOST, DB_USER, DB_PASS, DB_NAME, NULL, NULL );
+		parent::__construct ( DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, NULL );
 	
 	}
 
@@ -89,10 +81,11 @@ class Database extends Mysqli {
 	 * @return int userType
 	 */
 	public function getUserType($userId) {
-		if(!$userId) {
+
+		if (! $userId) {
 			return null;
 		}
-
+		
 		$query = "SELECT type FROM users WHERE id = {$userId}";
 		$result = $this->query ( $query );
 		
@@ -651,15 +644,20 @@ class Database extends Mysqli {
 	public function getProjectsByUser($userId) {
 
 		$query = "
-			SELECT *
-			FROM projects
-			WHERE id IN (
+			SELECT p.id, p.name, p.description, p.create_date, COALESCE(e.experiments,0) AS experiments
+			FROM projects p
+			LEFT JOIN (
+                SELECT project_id, count(*) experiments
+                FROM experiments
+            	GROUP BY project_id) e
+			ON e.project_id = p.id
+			WHERE p.id IN (
 				SELECT project_id
 				FROM projects_groups
 				WHERE group_id IN (
 					SELECT group_id
 					FROM users_groups
-					WHERE user_id = 35
+					WHERE user_id = {$userId}
 				)
 			)
 		";

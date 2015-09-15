@@ -29,7 +29,7 @@ $nav->addItem ( $dropDown );
 
 // PROJECTS
 $dropDown = new NavBarDropDown ( "Projects" );
-$dropDown->addItem ( new NavBarItem ( "My Projects", PROJECT_ROOT . "#", "disabled" ) );
+$dropDown->addItem ( new NavBarItem ( "My Projects", PROJECT_ROOT . "/project/my", "" ) );
 if (isAdmin () || GODMODE) {
 	$dropDown->addItem ( $separator );
 	$dropDown->addItem ( new NavHeader ( "Admin" ) );
