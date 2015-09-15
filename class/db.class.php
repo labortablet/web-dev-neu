@@ -516,7 +516,7 @@ class Database extends Mysqli {
 	public function getProjects() {
 
 		$query = "
-			SELECT p.id, p.name, p.description, p.create_date, COALESCE(groups,0) AS groups FROM projects p
+			SELECT p.id, p.name, p.description, p.create_date, COALESCE(groups,0) AS groups, e.experiments FROM projects p
 			LEFT JOIN (
 				SELECT COUNT(*) as groups, project_id as id
 				FROM projects p
@@ -524,6 +524,11 @@ class Database extends Mysqli {
 				ON pg.project_id = p.id
 				GROUP BY p.id) gpg
 			ON gpg.id = p.id
+			INNER JOIN (
+                SELECT `project_id`, count(*) `experiments`
+                FROM `experiments`
+				GROUP BY `project_id`) e
+			ON e.project_id = p.id
 				";
 		$result = $this->query ( $query );
 		$tmpresult = array ();

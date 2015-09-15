@@ -10,6 +10,7 @@ $projects = getProjects ();
 				<th style="padding: 3px;">ID</th>
 				<th style="padding: 3px;">Name</th>
 				<th style="padding: 3px;">In Groups</th>
+				<th style="padding: 3px;">Experiments</th>
 				<th style="padding: 3px;">Modified</th>
 			</tr>
 		</thead>
@@ -21,6 +22,7 @@ $projects = getProjects ();
 				<td style="padding: 3px;"><?php echo $p["id"]; ?></td>
 				<td style="padding: 3px;"><?php echo $p["name"]; ?></td>
 				<td style="padding: 3px;"><?php echo $p["groups"]; ?></td>
+				<td style="padding: 3px;"><?php echo $p["experiments"]; ?></td>
 				<td style="padding: 3px;"><?php echo $p["create_date"]; ?></td>
 			</tr>
         <?php
