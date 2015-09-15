@@ -2,8 +2,8 @@
 global $self;
 global $nav;
 
-#$nav = new Navigation ();
-#var_dump($nav->build());
+// $nav = new Navigation ();
+// var_dump($nav->build());
 // var_dump($nav->db->getUserType(35));
 ?>
 <!-- Navigation -->
@@ -32,15 +32,10 @@ global $nav;
 		<!-- /.navbar-collapse -->
             
 												 
-												 
-												 
-												 
-												 
-												 
-												 
-												 
-												 
-												 <?php else :
+
+												<?php
+												
+												else :
 													?>
             <!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
@@ -51,17 +46,18 @@ global $nav;
 		</div>
 		<!-- /.navbar-collapse -->
             
-												
-												
-												
-												
-												
-												
-												
-												
-												
-												<?php endif;
+
+												<?php
+													
+													echo "";
+												endif;
 												?>
         </div>
 	<!-- /.container -->
 </nav>
+<?php
+if (GODMODE == 1) {
+	echo "<p style=\"width: 100%; color:#F00; text-align: center;\">!!! GODMODE ENABLED !!!</p>";
+}
+?>
+<p></p>

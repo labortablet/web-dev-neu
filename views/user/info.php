@@ -1,7 +1,7 @@
 <?php
 $user = getUser ();
 // $users = getUsers();
-$projects = getProjects();
+$projects = getProjects ();
 $groups = getGroups ();
 global $db;
 ?>
@@ -25,38 +25,35 @@ global $db;
 		</table>
 		<h2>Edit</h2>
 		<form action="" method="POST">
-		<input type="hidden" name="action" value="updateUserSettings" />
+			<input type="hidden" name="action" value="updateUserSettings" />
 			<table border="1" style="width: 100%;"
 				class="table-striped table-hover">
 				<tr>
 					<th style="padding: 3px; width: 50%;">E-Mail</th>
 					<td style="padding: 3px;"><input class="form-control" type="text"
-						value="<?php echo "{$user['email']}"; ?>" disabled />
-					
-					</td>
+						value="<?php echo "{$user['email']}"; ?>" disabled /></td>
 				</tr>
 				<tr>
 					<th style="padding: 3px; width: 50%;">First name</th>
-					<td style="padding: 3px;"><input class="form-control" name="userFirstName" type="text"
-						value="<?php echo "{$user['firstname']}"; ?>" />
-					
-					</td>
+					<td style="padding: 3px;"><input class="form-control"
+						name="userFirstName" type="text"
+						value="<?php echo "{$user['firstname']}"; ?>" /></td>
 				</tr>
 				<tr>
 					<th style="padding: 3px; width: 50%;">Last name</th>
-					<td style="padding: 3px;"><input class="form-control" name="userLastName" type="text"
-						value="<?php echo "{$user['lastname']}"; ?>" />
-					
-					</td>
+					<td style="padding: 3px;"><input class="form-control"
+						name="userLastName" type="text"
+						value="<?php echo "{$user['lastname']}"; ?>" /></td>
 				</tr>
 				<tr>
 					<th style="padding: 3px; width: 50%;">Type</th>
-					<td style="padding: 3px;"><select class="form-control" name="userType">
-							<option value="1"<?php echo $user['type'] == 1 ? " selected" : ""; ?>>User</option>
-							<option value="2"<?php echo $user['type'] == 2 ? " selected" : ""; ?>>Admin</option>
-					</select>
-					
-					</td>
+					<td style="padding: 3px;"><select class="form-control"
+						name="userType">
+							<option value="1"
+								<?php echo $user['type'] == 1 ? " selected" : ""; ?>>User</option>
+							<option value="2"
+								<?php echo $user['type'] == 2 ? " selected" : ""; ?>>Admin</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="padding: 3px;"><input

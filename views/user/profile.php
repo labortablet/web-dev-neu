@@ -1,20 +1,19 @@
 <?php
 $groups = getGroups ();
-$projects = getProjects();
+$projects = getProjects ();
 
-#var_dump($projects);
+// var_dump($projects);
 
 ?>
 <div
 	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
 	<h1 style="text-align: center;">My profile</h1>
-	
+
 	<hr />
 	<div
 		style="margin-left: auto; margin-right: auto; width: 100%; max-width: 400px;">
 		<h3 style="text-align: center;">You are member of <?php echo count($groups);?> Group(s)</h3>
-		<table border="1" style="width: 100%;"
-			class="table-striped">
+		<table border="1" style="width: 100%;" class="table-striped">
 			<tr>
 				<th style="padding: 3px;">Name</th>
 				<th style="padding: 3px;">Description</th>
@@ -31,10 +30,9 @@ $projects = getProjects();
 									;
 									?>
 	    </table>
-	    <br />
-	    <h3 style="text-align: center;">You are member of <?php echo count($projects);?> Project(s)</h3>
-		<table border="1" style="width: 100%;"
-			class="table-striped">
+		<br />
+		<h3 style="text-align: center;">You are member of <?php echo count($projects);?> Project(s)</h3>
+		<table border="1" style="width: 100%;" class="table-striped">
 			<tr>
 				<th style="padding: 3px;">Name</th>
 				<th style="padding: 3px;">Description</th>
