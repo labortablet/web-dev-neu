@@ -1,4 +1,6 @@
-    <!-- jQuery -->
+	<div style="margin-top: 100px;"></div>
+
+	<!-- jQuery -->
     <script src="<?php echo PROJECT_ROOT; ?>/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
