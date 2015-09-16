@@ -24,7 +24,7 @@ if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateGroupSettings") {
 
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'deleteGroup') {
 	$db->deleteGroup ( $GLOBALS ["targetId"] );
-
+	
 	header ( "Location: {PROJECT_ROOT}/group/overview" );
 }
 
@@ -36,7 +36,23 @@ if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'removeUser') {
 	
 	if (! $error) {
 		$db->removeUserFromGroup ( $targetId, $_POST ["userId"] );
+		
+		$helper->redirectToSelf ();
+	}
+}
+
+if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'removeProject') {
 	
+	var_dump($_POST);
+	
+	if (! isset ( $_POST ["projectId"] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$db->removeProjectFromGroup ( $targetId, $_POST ["projectId"] );
+		$db->removeUserFromGroup ( $targetId, $_POST ["projectId"] );
+		
 		$helper->redirectToSelf ();
 	}
 }

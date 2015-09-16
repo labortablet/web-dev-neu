@@ -106,8 +106,9 @@ $projectsNotInGroup = projectsNotInGroup ();
 				<td style="padding: 3px;"><?php echo $p["id"]; ?></td>
 				<td style="padding: 3px;"><?php echo $p["name"]; ?></td>
 
-				<td style="padding: 3px; width: 1px;"><a class="btn btn-danger"
-					href="<?php echo PROJECT_ROOT."/group/removeproject/{$group['id']}/{$p['id']}"; ?>">Remove</a></td>
+				<td style="padding: 3px; width: 1px;" class="rowlink-skip"><button
+						class="btn btn-danger" data-toggle="modal"
+						data-target="#removeProject<?php echo $p["id"]; ?>">Remove</button></td>
 
 			</tr>
 	        <?php
@@ -164,11 +165,15 @@ $projectsNotInGroup = projectsNotInGroup ();
 					
 					
 					<h4>This can not be undone</h4>
-					<h4>Are you sure to delete this user from <strong><?php echo $group["name"]; ?></strong>?</h4>
+					<h4>
+						Are you sure to delete this user from <strong><?php echo $group["name"]; ?></strong>?
+					</h4>
 					</p>
 				</div>
 				<div class="modal-footer">
-					<form action="" method="POST" style="display: inline;">
+					<form
+						action="<?php echo PROJECT_ROOT."/group/info/".$group["id"]; ?>"
+						method="POST" style="display: inline;">
 						<input type="hidden" name="action" value="removeUser" /> <input
 							type="hidden" name="userId" value="<?php echo $u['id']; ?>" /> <input
 							type="submit" class="btn btn-danger" value="Remove" />
@@ -183,6 +188,61 @@ $projectsNotInGroup = projectsNotInGroup ();
 	endforeach
 	;
 	?>
+	
+	
+		<?php
+		foreach ( $projects as $p ) :
+			?>
+	<!-- Delete Project From Group Modal -->
+	<div id="removeProject<?php echo $p["id"]; ?>" class="modal fade"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Remove project from group</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<p>
+						<strong><?php echo $p["name"]; ?></strong>
+					</p>
+					<p>
+						ID: <?php echo $p["id"]; ?>
+					</p>
+					<p>
+						<?php echo "{$p["description"]}"; ?>
+					</p>
+					<p style="margin-top: 50px;">
+					
+					
+					<h4>This can not be undone</h4>
+					<h4>
+						Are you sure to delete this project from <strong><?php echo $p["name"]; ?></strong>?
+					</h4>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<form
+						action="<?php echo PROJECT_ROOT."/group/info/".$group["id"]; ?>"
+						method="POST" style="display: inline;">
+						<input type="hidden" name="action" value="removeProject" /> <input
+							type="hidden" name="projectId" value="<?php echo $p['id']; ?>" />
+						<input type="submit" class="btn btn-danger" value="Remove" />
+					</form>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<?php
+		endforeach
+		;
+		?>
+	
+	
 	<!-- Delete Group Modal -->
 	<div id="deleteGroup" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -211,7 +271,9 @@ $projectsNotInGroup = projectsNotInGroup ();
 					</p>
 				</div>
 				<div class="modal-footer">
-					<form action="" method="POST" style="display: inline;">
+					<form
+						action="<?php echo PROJECT_ROOT."/group/info/".$group["id"]; ?>"
+						method="POST" style="display: inline;">
 						<input type="hidden" name="action" value="deleteGroup" /> <input
 							type="submit" class="btn btn-danger" value="Delete" />
 					</form>
