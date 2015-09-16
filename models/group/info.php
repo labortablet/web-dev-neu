@@ -25,7 +25,7 @@ if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateGroupSettings") {
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'deleteGroup') {
 	$db->deleteGroup ( $GLOBALS ["targetId"] );
 	
-	header ( "Location: {PROJECT_ROOT}/group/overview" );
+	header ( "Location: ".PROJECT_ROOT."/group/overview" );
 }
 
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'removeUser') {

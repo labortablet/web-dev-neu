@@ -308,9 +308,9 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function deleteProject($projectId) {
-		
-		$this->processInsertQuery ( "DELETE FROM experiments WHERE project_id = {$projectId};" );
 
+		$this->processInsertQuery ( "DELETE FROM experiments WHERE project_id = {$projectId};" );
+		
 		$this->processInsertQuery ( "DELETE FROM projects_groups WHERE project_id = {$projectId};" );
 		
 		$this->processInsertQuery ( "DELETE FROM projects WHERE id = {$projectId};" );
@@ -510,7 +510,7 @@ class Database extends Mysqli {
 	public function getProjects() {
 
 		$query = "
-			SELECT p.id, p.name, p.description, p.create_date, COALESCE(groups,0) AS groups, e.experiments FROM projects p
+			SELECT p.id, p.name, p.description, p.create_date, COALESCE(groups,0) AS groups, COALESCE(e.experiments,0) AS experiments FROM projects p
 			LEFT JOIN (
 				SELECT COUNT(*) as groups, project_id as id
 				FROM projects p
@@ -518,7 +518,7 @@ class Database extends Mysqli {
 				ON pg.project_id = p.id
 				GROUP BY p.id) gpg
 			ON gpg.id = p.id
-			INNER JOIN (
+			LEFT JOIN (
                 SELECT `project_id`, count(*) `experiments`
                 FROM `experiments`
 				GROUP BY `project_id`) e
