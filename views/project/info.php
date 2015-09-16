@@ -11,10 +11,9 @@ $groups = getGroups ();
 		style="margin-left: auto; margin-right: auto; width: 100%; max-width: 400px;">
 		<table border="0" style="width: 100%;" class="">
 			<tr>
-				<td style="width: 100%; padding: 10px;"><a class="btn btn-danger"
-					style="width: 100%;"
-					href="<?php echo PROJECT_ROOT."/project/delete/{$project['id']}"; ?>">Delete
-						Project</a></td>
+				<td style="width: 100%; padding: 10px;"><button style="width: 100%;"
+						class="btn btn-danger" data-toggle="modal"
+						data-target="#deleteProject">Delete Project</button></td>
 			</tr>
 		</table>
 		<h2>Edit</h2>
@@ -61,6 +60,47 @@ $groups = getGroups ();
 									;
 									?>
 	    </table>
+	</div>
+	
+		<!-- Delete Project Modal -->
+	<div id="deleteProject" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Delete project</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<p>
+						<strong><?php echo $project["name"]; ?></strong>
+					</p>
+					<p>
+						ID: <?php echo $project["id"]; ?>
+					</p>
+					<p>
+						<?php echo "{$project["description"]}"; ?>
+					</p>
+					<p style="margin-top: 50px;">
+					
+					
+					<h4>This can not be undone</h4>
+					<h4>Are you sure to delete this project?</h4>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<form
+						action="<?php echo PROJECT_ROOT."/project/info/".$project["id"]; ?>"
+						method="POST" style="display: inline;">
+						<input type="hidden" name="action" value="deleteProject" /> <input
+							type="submit" class="btn btn-danger" value="Delete" />
+					</form>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
 
 </div>

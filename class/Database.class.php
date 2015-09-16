@@ -308,11 +308,12 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function deleteProject($projectId) {
-
-		$query = "DELETE FROM projects WHERE id = {$projectId};";
-		$result = $this->query ( $query );
 		
-		return $result;
+		$this->processInsertQuery ( "DELETE FROM experiments WHERE project_id = {$projectId};" );
+
+		$this->processInsertQuery ( "DELETE FROM projects_groups WHERE project_id = {$projectId};" );
+		
+		$this->processInsertQuery ( "DELETE FROM projects WHERE id = {$projectId};" );
 	
 	}
 
@@ -776,6 +777,47 @@ class Database extends Mysqli {
 				return $this->error;
 			}
 		}
+	
+	}
+
+	/**
+	 * Generic function to process insert and update queries
+	 *
+	 * @param string $query        	
+	 * @return boolean
+	 */
+	public function processInsertQuery($query) {
+
+		if ($stmt = $this->prepare ( $query )) {
+			$stmt->execute ();
+			
+			if ($this->error == '') {
+				return $stmt->insert_id;
+			}
+			else {
+				return $this->error;
+			}
+		}
+		return false;
+	
+	}
+
+	/**
+	 * Generic function to process select queries
+	 *
+	 * @param string $query        	
+	 * @return multitype:
+	 */
+	private function processSelectQuery($query) {
+
+		$result = $this->query ( $query );
+		$tmpresult = array ();
+		
+		while ( $row = $result->fetch_array ( MYSQL_ASSOC ) ) {
+			array_push ( $tmpresult, $row );
+		}
+		
+		return $tmpresult;
 	
 	}
 
