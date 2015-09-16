@@ -16,7 +16,7 @@ define ( 'DB_NAME', 'lablet_tabletprojectdb' );
 define ( 'DB_PORT', '3306' );
 
 // Project path on webserver
-define ( "PROJECT_ROOT", "/lablet" );
+define ( "PROJECT_ROOT", "/app" );
 
 // Echoes some debug information, e.g. when a controller is created
 define ( "DEBUG", 0 );

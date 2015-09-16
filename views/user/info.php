@@ -18,9 +18,9 @@ global $db;
 					style="width: 100%;"
 					href="<?php echo PROJECT_ROOT."/user/changepassword/{$user['id']}"; ?>">Set
 						password</a></td>
-				<td style="width: 50%; padding: 10px;"><a class="btn btn-danger"
-					style="width: 100%;"
-					href="<?php echo PROJECT_ROOT."/user/delete/{$user['id']}"; ?>">Delete</a></td>
+				<td style="width: 50%; padding: 10px;"><button style="width: 100%;"
+						class="btn btn-danger" data-toggle="modal"
+						data-target="#deleteUser">Delete</button></td>
 			</tr>
 		</table>
 		<h2>Edit</h2>
@@ -82,6 +82,45 @@ global $db;
 									;
 									?>
 	    </table>
+	</div>
+
+	<!-- Delete User Modal -->
+	<div id="deleteUser" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Delete user</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<p>
+						<strong><?php echo "{$user["firstname"]} {$user["lastname"]}"; ?></strong>
+					</p>
+					<p>
+						ID: <?php echo $user["id"]; ?>
+					</p>
+					<p>
+						<?php echo "{$user["email"]}"; ?>
+					</p>
+					<p style="margin-top: 50px;">
+
+
+						
+					<h4>This can not be undone</h4>
+					<h4>Are you sure to delete this user?</h4>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<form action="" method="POST" style="display: inline;">
+						<input type="hidden" name="action" value="deleteUser" />
+						<input type="submit" class="btn btn-danger" value="Delete" /></form>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
 
 </div>

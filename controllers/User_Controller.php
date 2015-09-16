@@ -81,24 +81,6 @@ class User_Controller extends Controller {
 	
 	}
 
-	public function delete($args = null) {
-
-		if (! $this->isAdmin) {
-			return $this->__call ( $this->defaultMethod, array () );
-		}
-		
-		$targetId = ( int ) $args;
-		
-		if ($targetId == null) {
-			return $this->overview ();
-		}
-		require 'models/user/delete.php';
-		if (file_exists ( "views/user/delete.php" )) {
-			$this->view->render ( "user/delete" );
-		}
-	
-	}
-
 	public function changepassword($args = null) {
 
 		if (! $this->isAdmin) {

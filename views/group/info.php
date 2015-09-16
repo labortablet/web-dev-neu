@@ -135,5 +135,4 @@ $projectsNotInGroup = projectsNotInGroup ();
 		</table>
 
 	</div>
-
 </div>
