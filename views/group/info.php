@@ -47,7 +47,7 @@ $projectsNotInGroup = projectsNotInGroup ();
 		</form>
 		<h2><?php echo count($users); ?> group members</h2>
 		<table border="1" style="width: 100%;"
-			class="rowlink table-striped table-hover">
+			class="rowlink table-striped table-hover" data-link="row">
 			<tr>
 				<th style="padding: 3px;">ID</th>
 				<th style="padding: 3px;">Name</th>
@@ -61,8 +61,9 @@ $projectsNotInGroup = projectsNotInGroup ();
 				<td style="padding: 3px;"><?php echo $u["id"]; ?></td>
 				<td style="padding: 3px;"><?php echo $u["firstname"]." ".$u["lastname"]; ?></td>
 				<td style="padding: 3px;"><?php echo $u["email"]; ?></td>
-				<td style="padding: 3px; width: 1px;"><a class="btn btn-danger"
-					href="<?php echo PROJECT_ROOT."/group/removeuser/{$group['id']}/{$u['id']}"; ?>">Remove</a></td>
+				<td style="padding: 3px; width: 1px;" class="rowlink-skip"><button
+						class="btn btn-danger" data-toggle="modal"
+						data-target="#removeUser<?php echo $u["id"]; ?>">Remove</button></td>
 			</tr>
 	        <?php
 									endforeach
@@ -135,6 +136,53 @@ $projectsNotInGroup = projectsNotInGroup ();
 
 	</div>
 
+	<?php
+	foreach ( $users as $u ) :
+		?>
+	<!-- Delete User From Group Modal -->
+	<div id="removeUser<?php echo $u["id"]; ?>" class="modal fade"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Remove user from group</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<p>
+						<strong><?php echo "{$u["firstname"]} {$u["lastname"]}"; ?></strong>
+					</p>
+					<p>
+						ID: <?php echo $u["id"]; ?>
+					</p>
+					<p>
+						<?php echo "{$u["email"]}"; ?>
+					</p>
+					<p style="margin-top: 50px;">
+					
+					
+					<h4>This can not be undone</h4>
+					<h4>Are you sure to delete this user from <strong><?php echo $group["name"]; ?></strong>?</h4>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<form action="" method="POST" style="display: inline;">
+						<input type="hidden" name="action" value="removeUser" /> <input
+							type="hidden" name="userId" value="<?php echo $u['id']; ?>" /> <input
+							type="submit" class="btn btn-danger" value="Remove" />
+					</form>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<?php
+	endforeach
+	;
+	?>
 	<!-- Delete Group Modal -->
 	<div id="deleteGroup" class="modal fade" role="dialog">
 		<div class="modal-dialog">

@@ -28,6 +28,19 @@ if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'deleteGroup') {
 	header ( "Location: {PROJECT_ROOT}/group/overview" );
 }
 
+if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'removeUser') {
+	
+	if (! isset ( $_POST ["userId"] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$db->removeUserFromGroup ( $targetId, $_POST ["userId"] );
+	
+		$helper->redirectToSelf ();
+	}
+}
+
 /**
  * Get the current group from the database
  */
