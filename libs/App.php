@@ -58,8 +58,10 @@ class App {
 
 		$url = $this->parseUrl ();
 		
-		if (file_exists ( 'controllers/' . $url [0] . '_Controller.php' )) {
-			$this->controller = $url [0] . "_Controller";
+		$controllerName = strtoupper ( substr ( $url [0], 0, 1 ) ) . strtolower ( substr ( $url [0], 1 ) );
+		
+		if (file_exists ( 'controllers/' . $controllerName . '_Controller.php' )) {
+			$this->controller = $controllerName . "_Controller";
 			unset ( $url [0] );
 		}
 		
