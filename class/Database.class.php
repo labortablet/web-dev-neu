@@ -23,10 +23,13 @@ class Database extends Mysqli {
 	 */
 	public function getUser($userId) {
 
-		$query = "SELECT * FROM `users` WHERE id = '{$userId}'";
-		$result = $this->query ( $query );
+		$result = $this->processSelectQuery ( "SELECT * FROM `users` WHERE id = '{$userId}'" );
 		
-		return $result->fetch_array ( MYSQL_ASSOC );
+		if (count ( $result ) == 0) {
+			return false;
+		}
+		
+		return $result [0];
 	
 	}
 
@@ -52,10 +55,13 @@ class Database extends Mysqli {
 	 */
 	public function getGroup($groupId) {
 
-		$query = "SELECT * FROM `groups` WHERE id = '{$groupId}'";
-		$result = $this->query ( $query );
+		$result = $this->processSelectQuery ( "SELECT * FROM `groups` WHERE id = '{$groupId}'" );
 		
-		return $result->fetch_array ( MYSQL_ASSOC );
+		if (count ( $result ) == 0) {
+			return false;
+		}
+		
+		return $result [0];
 	
 	}
 
@@ -66,10 +72,13 @@ class Database extends Mysqli {
 	 */
 	public function getProject($projectId) {
 
-		$query = "SELECT * FROM `projects` WHERE id = '{$projectId}'";
-		$result = $this->query ( $query );
+		$result = $this->processSelectQuery ( "SELECT * FROM `projects` WHERE id = '{$projectId}'" );
 		
-		return $result->fetch_array ( MYSQL_ASSOC );
+		if (count ( $result ) == 0) {
+			return false;
+		}
+		
+		return $result [0];
 	
 	}
 
@@ -113,8 +122,7 @@ class Database extends Mysqli {
 	 */
 	public function getHashByEMail($email) {
 
-		$query = "SELECT id, email, salt, hash_password FROM `users` WHERE email = '{$email}'";
-		$result = $this->query ( $query );
+		$result = $this->processSelectQuery ( "SELECT id, email, salt, hash_password FROM `users` WHERE email = '{$email}'" );
 		
 		return $result->fetch_array ( MYSQL_ASSOC );
 	
@@ -134,10 +142,10 @@ class Database extends Mysqli {
 	 */
 	public function getChallenge($sessionId, $userId) {
 
-		$query = "SELECT HEX(challenge) as challenge FROM `sessions` WHERE HEX(id) = '{$sessionId}' AND `user_id` = '{$userId}' AND `authorized` = 1";
-		$result = $this->query ( $query );
+		$result = $this->processSelectQuery ( "
+				SELECT HEX(challenge) as challenge FROM `sessions` WHERE HEX(id) = '{$sessionId}' AND `user_id` = '{$userId}' AND `authorized` = 1" );
 		
-		return $result->fetch_array ( MYSQL_ASSOC );
+		return $result;
 	
 	}
 
@@ -198,8 +206,7 @@ class Database extends Mysqli {
 	 */
 	public function updateUserSettings($userId, $firstName, $lastName, $type) {
 
-		$query = "UPDATE users SET lastname = '{$lastName}', firstname = '{$firstName}', type = '{$type}' WHERE id = {$userId};";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "UPDATE users SET lastname = '{$lastName}', firstname = '{$firstName}', type = '{$type}' WHERE id = {$userId};" );
 		
 		return $result;
 	
@@ -215,8 +222,7 @@ class Database extends Mysqli {
 	 */
 	public function updateGroupSettings($groupId, $name, $description) {
 
-		$query = "UPDATE groups SET name = '{$name}', description = '{$description}' WHERE id = {$groupId};";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "UPDATE groups SET name = '{$name}', description = '{$description}' WHERE id = {$groupId};" );
 		
 		return $result;
 	
@@ -232,8 +238,7 @@ class Database extends Mysqli {
 	 */
 	public function updateProjectSettings($projectId, $name, $description) {
 
-		$query = "UPDATE projects SET name = '{$name}', description = '{$description}' WHERE id = {$projectId};";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "UPDATE projects SET name = '{$name}', description = '{$description}' WHERE id = {$projectId};" );
 		
 		return $result;
 	
@@ -262,8 +267,7 @@ class Database extends Mysqli {
 	 */
 	public function removeUserFromGroup($groupId, $userId) {
 
-		$query = "DELETE FROM users_groups WHERE user_id = {$userId} AND group_id = {$groupId}";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "DELETE FROM users_groups WHERE user_id = {$userId} AND group_id = {$groupId}" );
 		
 		return $result;
 	
@@ -278,8 +282,7 @@ class Database extends Mysqli {
 	 */
 	public function removeProjectFromGroup($groupId, $projectId) {
 
-		$query = "DELETE FROM projects_groups WHERE project_id = {$projectId} AND group_id = {$groupId}";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "DELETE FROM projects_groups WHERE project_id = {$projectId} AND group_id = {$groupId}" );
 		
 		return $result;
 	
@@ -293,8 +296,7 @@ class Database extends Mysqli {
 	 */
 	public function deleteGroup($groupId) {
 
-		$query = "DELETE FROM groups WHERE id = {$groupId};";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "DELETE FROM groups WHERE id = {$groupId};" );
 		
 		return $result;
 	
@@ -381,8 +383,7 @@ class Database extends Mysqli {
 	 */
 	public function updatePassword($userId, $password, $salt) {
 
-		$query = "UPDATE users SET hash_password = '{$password}', salt = '{$salt}' WHERE id = {$userId};";
-		$result = $this->query ( $query );
+		$result = $this->processInsertQuery ( "UPDATE users SET hash_password = '{$password}', salt = '{$salt}' WHERE id = {$userId};" );
 		
 		return $result;
 	

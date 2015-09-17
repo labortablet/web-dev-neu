@@ -43,7 +43,7 @@ class Session extends SessionHandler {
 			return false;
 		}
 		
-		$dbChallenge = strtolower ( $res ['challenge'] );
+		$dbChallenge = strtolower ( $res [0] ['challenge'] );
 		$calcChallenge = strtolower ( Session::calculateChallenge ( $_SESSION ['sessionid'] ) );
 		
 		if ($dbChallenge == $calcChallenge) {
