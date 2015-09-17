@@ -6,8 +6,7 @@ $projects = getProjects ();
 $usersNotInGroup = getUsersNotInGroup ();
 $projectsNotInGroup = projectsNotInGroup ();
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">Group info: <?php echo "{$group['name']} (ID {$group['id']})"; ?></h1>
 	<h3 style="text-align: center;"><?php echo "{$group['description']}"; ?></h3>
 	<hr />

@@ -1,8 +1,7 @@
 <?php
 $users = getUsers ( 100 );
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">User Overview (<?php echo count($users); ?>)</h1>
 	<table border="1" style="width: 100%;"
 		class="rowlink table-striped table-hover">

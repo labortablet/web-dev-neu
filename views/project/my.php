@@ -2,8 +2,7 @@
 $projects = getProjects ();
 
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">My projects</h1>
 	<h3 style="text-align: center;">You are assigned to <?php echo count($projects);?> Project(s)</h3>
 	<hr />

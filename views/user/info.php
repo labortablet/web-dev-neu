@@ -5,8 +5,7 @@ $projects = getProjects ();
 $groups = getGroups ();
 global $db;
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">User info: <?php echo "{$user['firstname']} {$user['lastname']} (ID {$user['id']})"; ?></h1>
 	<h3 style="text-align: center;"><?php echo "{$user['email']}"; ?></h3>
 	<hr />

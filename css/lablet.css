@@ -9,6 +9,14 @@
 	padding-bottom: 10px;
 }
 
+#contentPanel {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	max-width: 800px;
+	padding: 10px;
+}
+
 .panel {
 	margin-bottom: 50px;
 }

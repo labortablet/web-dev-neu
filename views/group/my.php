@@ -2,8 +2,7 @@
 $groups = getGroups ();
 
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">My groups</h1>
 	<h3 style="text-align: center;">You are member of <?php echo count($groups);?> Group(s)</h3>
 	<hr />

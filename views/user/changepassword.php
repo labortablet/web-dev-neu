@@ -1,7 +1,7 @@
 <?php
 $user = getUser();
 ?>
-<div style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
     <h1 style="text-align:center;">Set Password for: <?php echo "{$user['firstname']} {$user['lastname']} (ID {$user['id']})"; ?></h1>
     <div style="margin-left: auto; margin-right: auto; width: 100%; max-width: 400px;">
         <p class="bg-success"><?php echo successMsg(); ?></p>

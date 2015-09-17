@@ -5,8 +5,7 @@ $projects = getProjects ();
 // var_dump($projects);
 
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">My profile</h1>
 
 	<hr />

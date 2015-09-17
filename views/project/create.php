@@ -1,5 +1,4 @@
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">New Project</h1>
 	<div
 		style="margin-left: auto; margin-right: auto; width: 100%; max-width: 400px;">

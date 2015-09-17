@@ -2,8 +2,7 @@
 $project = getProject ();
 $groups = getGroups ();
 ?>
-<div
-	style="margin-left: auto; margin-right: auto; width: 100%; max-width: 800px;">
+<div id="contentPanel">
 	<h1 style="text-align: center;">Project info: <?php echo "{$project['name']} (ID {$project['id']})"; ?></h1>
 	<h3 style="text-align: center;"><?php echo "{$project['description']}"; ?></h3>
 	<hr />
