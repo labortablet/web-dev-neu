@@ -3,3 +3,12 @@
 .rowlink tr:hover {
 	cursor: pointer;
 }
+
+.well.experiment {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.panel {
+	margin-bottom: 50px;
+}

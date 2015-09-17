@@ -61,8 +61,8 @@ $groups = getGroups ();
 									?>
 	    </table>
 	</div>
-	
-		<!-- Delete Project Modal -->
+
+	<!-- Delete Project Modal -->
 	<div id="deleteProject" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 

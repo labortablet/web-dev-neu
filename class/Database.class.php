@@ -507,6 +507,32 @@ class Database extends Mysqli {
 	
 	}
 
+	/**
+	 * Get experiments by a given project id
+	 *
+	 * @param int $projectId        	
+	 * @return Ambigous <multitype:, multitype:>
+	 */
+	public function getExperiments($projectId, $userId = 0) {
+
+		$experiments = $this->processSelectQuery ( "
+			SELECT ex.id, ex.name, ex.description, ex.create_date, COALESCE(en.entries,0) AS entries, COALESCE(enme.entries,0) AS entries_me
+			FROM `experiments` ex
+			LEFT JOIN (SELECT expr_id, count(*) entries FROM `entries` GROUP BY `expr_id`) en
+			ON en.expr_id = ex.id
+			LEFT JOIN (SELECT expr_id, count(*) entries FROM `entries` WHERE `user_id` = '{$userId}' GROUP BY `expr_id`) enme
+			ON enme.expr_id = ex.id
+			WHERE `project_id` = '{$projectId}'" );
+		
+		return $experiments;
+	
+	}
+
+	/**
+	 * Gets all projects
+	 *
+	 * @return multitype:
+	 */
 	public function getProjects() {
 
 		$query = "

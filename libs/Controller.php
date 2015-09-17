@@ -48,7 +48,7 @@ class Controller {
 	 *
 	 * @param unknown $args        	
 	 */
-	public function defaultMethod($args) {
+	public function defaultMethod($args = array()) {
 
 		call_user_func_array ( array (
 				$this,

@@ -24,8 +24,8 @@ if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateProjectSettings")
 
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'deleteProject') {
 	$res = $db->deleteProject ( $targetId );
-
-	header ( "Location: ".PROJECT_ROOT."/project/overview" );
+	
+	header ( "Location: " . PROJECT_ROOT . "/project/overview" );
 }
 
 /**
