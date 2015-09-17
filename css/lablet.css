@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
+html {
+	overflow-y: scroll;
+}
+
 .rowlink tr:hover {
 	cursor: pointer;
 }
