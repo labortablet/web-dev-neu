@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$('.rowlink td').click(function() {
+	$('.rowlink td, .rowlink th').click(function() {
 		var redirect = !$(this).hasClass("rowlink-skip");
 		console.log(redirect);
 

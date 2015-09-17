@@ -247,10 +247,9 @@ class Database extends Mysqli {
 	 */
 	public function deleteUser($userId) {
 
-		$query = "DELETE FROM users WHERE id = {$userId};";
-		$result = $this->query ( $query );
-		
-		return $result;
+		$this->processInsertQuery ( "UPDATE `sessions` SET `user_id` = NULL WHERE user_id = {$userId};" );
+		$this->processInsertQuery ( "DELETE FROM `users_groups` WHERE `user_id` = {$userId}" );
+		$this->processInsertQuery ( "DELETE FROM `users` WHERE `id` = {$userId}" );
 	
 	}
 
@@ -525,6 +524,25 @@ class Database extends Mysqli {
 			WHERE `project_id` = '{$projectId}'" );
 		
 		return $experiments;
+	
+	}
+
+	/**
+	 * Create an experiment
+	 *
+	 * @param int $projectId        	
+	 * @param string $experimentName        	
+	 * @param string $experimentDescription        	
+	 * @return boolean
+	 */
+	public function createExperiment($projectId, $experimentName, $experimentDescription) {
+
+		$result = $this->processInsertQuery ( "
+			INSERT INTO `experiments` (`id`, `name`, `description`, `project_id`, `create_date`)
+				VALUES (NULL, '{$experimentName}', '{$experimentDescription}', '{$projectId}', CURRENT_TIMESTAMP);
+		" );
+		
+		return $result;
 	
 	}
 

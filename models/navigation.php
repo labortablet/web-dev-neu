@@ -7,7 +7,7 @@ $separator = new NavSeparator ();
 
 // USERS
 $dropDown = new NavBarDropDown ( "Users" );
-$dropDown->addItem ( new NavBarItem ( "My Profile", PROJECT_ROOT . "/user/profile", "" ) );
+$dropDown->addItem ( new NavBarItem ( "My Profile", PROJECT_ROOT . "/me", "" ) );
 if (isAdmin () || GODMODE) {
 	$dropDown->addItem ( $separator );
 	$dropDown->addItem ( new NavHeader ( "Admin" ) );

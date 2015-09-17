@@ -28,7 +28,7 @@ if (isset ( $_POST ["action"] ) && $_POST ["action"] == "updateUserSettings") {
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'deleteUser') {
 	$db->deleteUser ( $GLOBALS ["targetId"] );
 	
-	header ( "Location: {PROJECT_ROOT}/user/overview" );
+	header ( "Location: " . PROJECT_ROOT . "/user/overview" );
 }
 
 /**
