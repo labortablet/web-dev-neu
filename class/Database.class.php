@@ -300,6 +300,8 @@ class Database extends Mysqli {
 	 */
 	public function deleteGroup($groupId) {
 
+		$this->processInsertQuery ( "DELETE FROM `projects_groups` WHERE `group_id` = {$groupId}" );
+		$this->processInsertQuery ( "DELETE FROM `users_groups` WHERE `group_id` = {$groupId}" );
 		$result = $this->processInsertQuery ( "DELETE FROM groups WHERE id = {$groupId};" );
 		
 		return $result;
@@ -389,7 +391,14 @@ class Database extends Mysqli {
 
 		$result = $this->processInsertQuery ( "UPDATE users SET hash_password = '{$password}', salt = '{$salt}' WHERE id = {$userId};" );
 		
-		return $result;
+		if ($result === 0) {
+			return true;
+		}
+		elseif ($result == false || $result == null) {
+			
+			return false;
+		}
+		return true;
 	
 	}
 
