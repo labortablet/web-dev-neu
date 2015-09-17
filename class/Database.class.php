@@ -124,7 +124,11 @@ class Database extends Mysqli {
 
 		$result = $this->processSelectQuery ( "SELECT id, email, salt, hash_password FROM `users` WHERE email = '{$email}'" );
 		
-		return $result->fetch_array ( MYSQL_ASSOC );
+		if (count ( $result ) == 0) {
+			return false;
+		}
+		
+		return $result [0];
 	
 	}
 
