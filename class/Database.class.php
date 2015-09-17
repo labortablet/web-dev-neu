@@ -531,13 +531,40 @@ class Database extends Mysqli {
 		$experiments = $this->processSelectQuery ( "
 			SELECT ex.id, ex.name, ex.description, ex.create_date, COALESCE(en.entries,0) AS entries, COALESCE(enme.entries,0) AS entries_me
 			FROM `experiments` ex
-			LEFT JOIN (SELECT expr_id, count(*) entries FROM `entries` GROUP BY `expr_id`) en
-			ON en.expr_id = ex.id
-			LEFT JOIN (SELECT expr_id, count(*) entries FROM `entries` WHERE `user_id` = '{$userId}' GROUP BY `expr_id`) enme
-			ON enme.expr_id = ex.id
+			LEFT JOIN (SELECT expr_id, count(*) entries FROM `entries` GROUP BY `expr_id`) en ON en.expr_id = ex.id
+			LEFT JOIN (SELECT expr_id, count(*) entries FROM `entries` WHERE `user_id` = '{$userId}' GROUP BY `expr_id`) enme ON enme.expr_id = ex.id
 			WHERE `project_id` = '{$projectId}'" );
 		
 		return $experiments;
+	
+	}
+
+	public function getUserExperiments($userId, $excludeExperiment = 0) {
+
+		$experiments = $this->processSelectQuery ( "
+			SELECT ex.id, ex.name experiment_name, p.name project_name
+			FROM  `groups` g
+			INNER JOIN  `users_groups` ug ON ug.group_id = g.id
+			INNER JOIN  `projects_groups` pg ON pg.group_id = g.id
+			INNER JOIN `projects` p ON p.id = pg.project_id
+			INNER JOIN  `experiments` ex ON ex.project_id = pg.project_id
+			WHERE ug.user_id = '{$userId}' AND ex.id != '{$excludeExperiment}'	
+		" );
+		
+		return $experiments;
+	
+	}
+
+	/**
+	 * Delete experiment and move its entries to another experiment
+	 *
+	 * @param int $experimentId        	
+	 * @param int $moveEntriesTo        	
+	 */
+	public function deleteExperiment($experimentId, $moveEntriesTo) {
+
+		$this->processInsertQuery ( "UPDATE entries SET expr_id = '{$moveEntriesTo}' WHERE expr_id = {$experimentId};" );
+		$this->processInsertQuery ( "DELETE FROM `experiments` WHERE `id` = '{$experimentId}'" );
 	
 	}
 

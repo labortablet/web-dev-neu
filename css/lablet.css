@@ -11,6 +11,13 @@ html {
 .well.experiment {
 	padding-top: 10px;
 	padding-bottom: 10px;
+	position: relative;
+}
+
+.well.experiment .delete-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
 }
 
 #contentPanel {
@@ -23,4 +30,5 @@ html {
 
 .panel {
 	margin-bottom: 50px;
+	border-width: 2px;
 }

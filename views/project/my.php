@@ -7,7 +7,7 @@ $projects = getProjects ();
 	<h3 style="text-align: center;">You are assigned to <?php echo count($projects);?> Project(s)</h3>
 	<hr />
 	<div
-		style="margin-left: auto; margin-right: auto; width: 100%; max-width: 400px;">
+		style="margin-left: auto; margin-right: auto; width: 100%; max-width: 600px;">
 	    <?php
 					foreach ( $projects as $p ) :
 						
@@ -44,7 +44,10 @@ $projects = getProjects ();
 						<li><?php echo $ex["entries"]; ?> Entries total</li>
 						<li><?php echo $ex["entries_me"]; ?> Entries by me</li>
 					</ul>
-
+					<div class="delete-button">
+						<button class="btn btn-danger" data-toggle="modal"
+							data-target="#deleteExperiment<?php echo $ex["id"]; ?>">Delete</button>
+					</div>
 				</div>
 			<?php
 						endforeach
@@ -52,8 +55,78 @@ $projects = getProjects ();
 						?>
 			</div>
 		</div>
+		
+		<?php
+						foreach ( $experiments as $ex ) :
+							
+							$moveToExperiments = getUserExperiments ( $ex ["id"] );
+							?>
+		<!-- Delete Experiment Modal -->
+		<div id="deleteExperiment<?php echo $ex ["id"]; ?>" class="modal fade"
+			role="dialog">
+			<div class="modal-dialog">
 
-		<!-- Delete Project Modal -->
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Delete Experiment</h4>
+					</div>
+					<div class="modal-body" style="text-align: left;">
+
+						<div class="text-center"
+							style="margin: auto; width: 100%; max-width: 300px; margin-bottom: 20px;">
+							<p>
+								<strong>Project:</strong> <?php echo $p["name"]; ?>
+							</p>
+							<p>
+								<strong>Experiment:</strong> <?php echo $ex["name"]; ?>
+							</p>
+							<p>
+								<strong>Entries:</strong> <?php echo $ex["entries"]; ?> total, <?php echo $ex["entries_me"]; ?> by me
+							</p>
+
+							<p style="margin-top: 25px;">Move entries to experiment:</p>
+							<form action="" method="POST">
+								<input type="hidden" name="experimentId"
+									value="<?php echo $ex["id"]; ?>" /> <select
+									class="form-control" name="moveToExperiment">
+									<option value="0">--</option>
+									<?php foreach ($moveToExperiments as $mte): ?>
+									<option value="<?php echo $mte["id"]; ?>"><?php echo "{$mte["project_name"]}/{$mte["experiment_name"]}"; ?></option>
+									
+									
+									<?php endforeach; ?>
+								
+								
+								</select>
+						
+						</div>
+
+						<div class="text-center">
+							<strong>Are you sure to delete this experiment?</strong>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+
+						<input type="hidden" name="action" value="deleteExperiment" /> <input
+							type="submit" class="btn btn-danger" value="Delete" />
+
+
+						</form>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<?php
+						endforeach
+						;
+						?>
+
+		<!-- Create Experiment Modal -->
 		<div id="createExperiment<?php echo $p ["id"]; ?>" class="modal fade"
 			role="dialog">
 			<div class="modal-dialog">
@@ -86,15 +159,15 @@ $projects = getProjects ();
 
 						<input type="hidden" name="action" value="createExperiment" /> <input
 							type="submit" class="btn btn-primary" value="Create" />
-					
-					
-					</form>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				</div>
-			</div>
 
+
+						</form>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+
+			</div>
 		</div>
-	</div>
 	
 	    <?php
 					endforeach

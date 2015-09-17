@@ -19,7 +19,25 @@ if (isset ( $_POST ["action"] ) && $_POST ["action"] == "createExperiment") {
 	
 	if (! $error) {
 		$db->createExperiment ( $_POST ["experimentProject"], $_POST ["experimentName"], $_POST ["experimentDescription"] );
+		
+		$helper->redirectToSelf ();
+	}
 
+}
+
+if (isset ( $_POST ["action"] ) && $_POST ["action"] == "deleteExperiment") {
+	
+	if (! isset ( $_POST ["experimentId"] )) {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ["moveToExperiment"] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$db->deleteExperiment ( $_POST ["experimentId"], $_POST ["moveToExperiment"] );
+		
 		$helper->redirectToSelf ();
 	}
 
@@ -44,6 +62,13 @@ function getExperiments($projectId) {
 
 	global $db;
 	return $db->getExperiments ( $projectId, $_SESSION ['userid'] );
+
+}
+
+function getUserExperiments($experimentToExclude) {
+
+	global $db;
+	return $db->getUserExperiments ( $_SESSION ['userid'], $experimentToExclude );
 
 }
 
