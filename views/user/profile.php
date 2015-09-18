@@ -3,11 +3,10 @@ $groups = getGroups ();
 $projects = getProjects ();
 
 // var_dump($projects);
-
 ?>
 <div id="contentPanel">
 	<h1 style="text-align: center;">My profile</h1>
-
+	<h3 style="text-align: center;"><?php echo "{$self["firstname"]} {$self["lastname"]} &lt;{$self["email"]}&gt;"; ?></h3>
 	<hr />
 
 	<div

@@ -44,7 +44,12 @@ $projects = getProjects ();
 						<li><?php echo $ex["entries"]; ?> Entries total</li>
 						<li><?php echo $ex["entries_me"]; ?> Entries by me</li>
 					</ul>
-					<div class="delete-button">
+					<div class="delete-button-xs visible-xs">
+						<button class="btn btn-danger" data-toggle="modal"
+							data-target="#deleteExperiment<?php echo $ex["id"]; ?>">Delete
+							Experiment</button>
+					</div>
+					<div class="delete-button-sm hidden-xs">
 						<button class="btn btn-danger" data-toggle="modal"
 							data-target="#deleteExperiment<?php echo $ex["id"]; ?>">Delete</button>
 					</div>

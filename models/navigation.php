@@ -8,12 +8,11 @@ $separator = new NavSeparator ();
 // USERS
 $nav->addItem ( new NavBarItem ( "My Profile", PROJECT_ROOT . "/me", "" ) );
 
-
 // GROUPS
-#$nav->addItem ( new NavBarItem ( "Groups", PROJECT_ROOT . "/group/my", "" ) );
+// $nav->addItem ( new NavBarItem ( "Groups", PROJECT_ROOT . "/group/my", "" ) );
 
 // PROJECTS
-$nav->addItem ( new NavBarItem ( "Projects", PROJECT_ROOT . "/project/my", "" ) );
+$nav->addItem ( new NavBarItem ( "Projects", PROJECT_ROOT. "/project/my", "" ) );
 
 // ADMIN
 if (isAdmin () || GODMODE) {

@@ -1,7 +1,6 @@
 <?php
 global $self;
 global $nav;
-
 // $nav = new Navigation ();
 // var_dump($nav->build());
 // var_dump($nav->db->getUserType(35));
@@ -17,7 +16,7 @@ global $nav;
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="?"><?php echo $self["email"]; ?></a>
+			<a class="navbar-brand" href="<?php echo PROJECT_ROOT . "/me"; ?>"><?php echo "{$self["firstname"]} {$self["lastname"]}"; ?></a>
 		</div>
             <?php
 												if ($session->isValid ()) :
@@ -33,6 +32,7 @@ global $nav;
             
 												 
 
+												
 												<?php
 												
 												else :

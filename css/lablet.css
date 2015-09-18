@@ -14,10 +14,14 @@ html {
 	position: relative;
 }
 
-.well.experiment .delete-button {
+.well.experiment .delete-button-sm {
 	position: absolute;
 	top: 10px;
 	right: 10px;
+}
+
+.well.experiment .delete-button-xs {
+	text-align: center;
 }
 
 #contentPanel {

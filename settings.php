@@ -1,4 +1,11 @@
 <?php
+#### PREFERENCES ####
+define ( 'PAGE_TITLE', 'Lablet - Lab Management' );
+
+
+
+
+#### SYSTEM SETTINGS ####
 
 // Database server
 define ( 'DB_HOST', 'localhost' );
