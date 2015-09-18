@@ -91,7 +91,7 @@ $projects = getProjects ();
 								<input type="hidden" name="experimentId"
 									value="<?php echo $ex["id"]; ?>" /> <select
 									class="form-control" name="moveToExperiment">
-									<option value="0">--</option>
+									<option value="0">[ Delete entries aswell ]</option>
 									<?php foreach ($moveToExperiments as $mte): ?>
 									<option value="<?php echo $mte["id"]; ?>"><?php echo "{$mte["project_name"]}/{$mte["experiment_name"]}"; ?></option>
 									
