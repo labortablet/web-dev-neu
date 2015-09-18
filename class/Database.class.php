@@ -168,7 +168,9 @@ class Database extends Mysqli {
 	 */
 	public function insertSession($userId, $sessionId, $challenge) {
 
-		$query = "
+		$this->processInsertQuery ( "UPDATE `sessions` SET `authorized` = 0 WHERE `user_id` = '{$userId}'" );
+		
+		$id = $this->processInsertQuery ( "
             INSERT INTO `sessions` 
                 (
                 `id`,
@@ -184,19 +186,7 @@ class Database extends Mysqli {
                 UNHEX('{$challenge}'),
                 '{$userId}',
                 '1'
-                );";
-		
-		if ($stmt = $this->prepare ( $query )) {
-			$stmt->execute ();
-			
-			if ($this->error == '') {
-				return $stmt->insert_id;
-			}
-			else {
-				return $this->error;
-			}
-		}
-	
+                );" );
 	}
 
 	/**
