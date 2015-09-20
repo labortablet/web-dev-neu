@@ -36,3 +36,24 @@ html {
 	margin-bottom: 50px;
 	border-width: 2px;
 }
+
+.footer {
+	background-color: #222;
+	position: absolute;
+	display: table;
+	height: 50px;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+}
+
+.footer .middle {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.footer .container {
+	line-height: 50px;
+	text-align: center;
+	color: #9d9d9d;
+}
