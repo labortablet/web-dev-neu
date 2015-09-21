@@ -187,6 +187,7 @@ class Database extends Mysqli {
                 '{$userId}',
                 '1'
                 );" );
+	
 	}
 
 	/**
@@ -529,6 +530,29 @@ class Database extends Mysqli {
 	
 	}
 
+	public function getEntries($experimentId) {
+
+		$entities = $this->processSelectQuery ( "
+			SELECT en.id, en.title, en.attachment, en.attachment_type, u.firstname, u.lastname
+			FROM  `entries` en
+			INNER JOIN `users` u ON u.id = en.user_id
+			WHERE expr_id = '{$experimentId}'" );
+		
+		return $entities;
+	
+	}
+
+	public function getExperiment($experimentId) {
+
+		$experiment = $this->processSelectQuery ( "
+			SELECT ex.id, ex.name, ex.description, ex.create_date, ex.project_id, p.name as project_name FROM `experiments` ex
+			INNER JOIN `projects` p ON p.id = ex.project_id
+			WHERE ex.id = {$experimentId}" );
+		
+		return $experiment [0];
+	
+	}
+
 	public function getUserExperiments($userId, $excludeExperiment = 0) {
 
 		$experiments = $this->processSelectQuery ( "
@@ -542,6 +566,22 @@ class Database extends Mysqli {
 		" );
 		
 		return $experiments;
+	
+	}
+
+	public function canAccessExperiment($userId, $experimentId) {
+
+		$canAccess = $this->processSelectQuery ( "
+			SELECT count(*) as count
+			FROM `users` u
+			INNER JOIN `users_groups` ug ON ug.user_id = u.id
+			INNER JOIN `projects_groups` pg ON pg.group_id = ug.group_id
+			INNER JOIN `projects` p ON p.id = pg.project_id
+			INNER JOIN `experiments` ex ON ex.project_id = p.id
+			WHERE u.id = '{$userId}' AND ex.id = '{$experimentId}'		
+		" );
+		
+		return $canAccess [0] ["count"];
 	
 	}
 

@@ -36,6 +36,7 @@ $projects = getProjects ();
 						foreach ( $experiments as $ex ) :
 							?>
 				<div class="well experiment">
+					<a href="<?php echo PROJECT_ROOT."/experiment/".$ex["id"];?>"><span class="experimentLink"></span></a>
 					Experiment: <?php echo $ex["name"];?>
 					<p>
 						<small><?php echo $ex["description"];?></small>
