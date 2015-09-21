@@ -18,20 +18,27 @@ class App {
 		global $self;
 		global $db;
 		
+		$url = $this->parseUrl ();
+		
+		// Check for public accessible controllers like about, or a landing page
+		$publicControllers = array (
+				"about" 
+		);
+		
+		if (in_array ( $url [0], $publicControllers )) {
+			$this->regularCall ( $url );
+			exit ();
+		}
+		
 		// session handling
 		$session = new Session ();
-		
-		// var_dump($_SESSION);
-		
-		// var_dump($session->isValid());
 		
 		if (! $session->isValid ()) {
 			$this->loginCall ();
 		}
 		else {
 			$self = $db->getUser ( $_SESSION ["userid"] );
-			$db->getUser ( 5 );
-			$this->regularCall ();
+			$this->regularCall ( $url );
 		}
 	
 	}
@@ -54,10 +61,8 @@ class App {
 	/**
 	 * Called if a the user is logged in and a valid session was found
 	 */
-	private function regularCall() {
+	private function regularCall($url) {
 
-		$url = $this->parseUrl ();
-		
 		$controllerName = strtoupper ( substr ( $url [0], 0, 1 ) ) . strtolower ( substr ( $url [0], 1 ) );
 		
 		if (file_exists ( 'controllers/' . $controllerName . '_Controller.php' )) {
