@@ -1,11 +1,12 @@
 
 <div style="margin-top: 100px;"></div>
-
 <footer class="footer">
-	<div class="middle">
-		<div class="container"></div>
+	<div class="container">
+		<a href="<?php echo PROJECT_ROOT; ?>/about">About</a> | <a
+			href="<?php echo PROJECT_ROOT; ?>/about/privacy">Privacy Policy</a>
 	</div>
 </footer>
+
 
 <!-- jQuery -->
 <script src="<?php echo PROJECT_ROOT; ?>/js/jquery.js"></script>

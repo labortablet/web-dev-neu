@@ -1,11 +1,34 @@
 <?php
-#### PREFERENCES ####
+// ###
+// ### PREFERENCES ####
+// ###
 define ( 'PAGE_TITLE', 'Lablet - Lab Management' );
 
+// ###
+// ### ABOUT PAGE ####
+// ###
 
+// Your name
+define ( 'ABOUT_NAME', 'Sherlock Holmes' );
 
+// Your street and number
+define ( 'ABOUT_STREET', '221B Baker Street' );
 
-#### SYSTEM SETTINGS ####
+// Your zip and city
+define ( 'ABOUT_CITY', '76543 London' );
+
+// Your email adress
+define ( 'ABOUT_EMAIL', 'curiousshirley@example.net' );
+
+// Your phone number
+define ( 'ABOUT_PHONE', '01234 / 567890' );
+
+// Your fax number
+define ( 'ABOUT_FAX', '01234 / 567891' );
+
+// ###
+// ### SYSTEM SETTINGS ####
+// ###
 
 // Database server
 define ( 'DB_HOST', 'localhost' );
