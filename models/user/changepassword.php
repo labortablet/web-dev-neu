@@ -53,15 +53,16 @@ if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'changePassword') {
 	}
 	
 	if ($GLOBALS ["errorMsg"] == "") {
-		
+		// var_dump($_POST);
 		$salt = $helper->createSalt ();
-		$saltedPassword = $helper->saltPassword ( $_POST ['password'], $salt );
+		// var_dump("SALT CREATED", $salt);
+		$saltedPassword = $helper->saltPassword ( $salt, $_POST ['password'] );
 		
 		if ($db->updatePassword ( $GLOBALS ["targetId"], $saltedPassword, $salt )) {
 			$GLOBALS ["successMsg"] = "Success!<br />";
 		}
 		else {
-			$GLOBALS ["errorMsg"] .= "Error<br />";
+			$GLOBALS ["errorMsg"] .= "Error - Database error. Try again<br />";
 		}
 	}
 

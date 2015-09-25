@@ -128,6 +128,14 @@ class Database extends Mysqli {
 			return false;
 		}
 		
+		if (isset ( $result [0] ["salt"] )) {
+			$result [0] ["salt"] = bin2hex ( $result [0] ["salt"] );
+		}
+		
+		if (isset ( $result [0] ["hash_password"] )) {
+			$result [0] ["hash_password"] = bin2hex ( $result [0] ["hash_password"] );
+		}
+		
 		return $result [0];
 	
 	}
@@ -380,6 +388,19 @@ class Database extends Mysqli {
 	 */
 	public function updatePassword($userId, $password, $salt) {
 
+		if (strlen ( $password ) != 64) {
+			return false;
+		}
+		
+		$password = hex2bin ( $password );
+		$salt = hex2bin ( $salt );
+		
+		// var_dump("INSERT SALT",$salt);
+		// var_dump("INSERT PW", $password);
+		
+		$password = $this->real_escape_string ( $password );
+		$salt = $this->real_escape_string ( $salt );
+		
 		$result = $this->processInsertQuery ( "UPDATE users SET hash_password = '{$password}', salt = '{$salt}' WHERE id = {$userId};" );
 		
 		if ($result === 0) {
