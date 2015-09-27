@@ -553,13 +553,14 @@ class Database extends Mysqli {
 
 	public function getEntries($experimentId) {
 
-		$entities = $this->processSelectQuery ( "
-			SELECT en.id, en.title, en.attachment, en.attachment_type, u.firstname, u.lastname
+		$entries = $this->processSelectQuery ( "
+			SELECT en.id, en.title, en.attachment, en.attachment_type, u.firstname, u.lastname, en.date
 			FROM  `entries` en
 			INNER JOIN `users` u ON u.id = en.user_id
-			WHERE expr_id = '{$experimentId}'" );
+			WHERE expr_id = '{$experimentId}'
+			ORDER BY `date` DESC" );
 		
-		return $entities;
+		return $entries;
 	
 	}
 
