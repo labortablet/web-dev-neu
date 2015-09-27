@@ -1,5 +1,6 @@
 <?php
 global $db;
+global $helper;
 $GLOBALS ["successMsg"] = "";
 $GLOBALS ["errorMsg"] = "";
 $cleanData = array ();
@@ -64,11 +65,10 @@ if (isset ( $_POST ['action'] ) && $_POST ['action'] = 'createUser') {
 	
 	if ($GLOBALS ["errorMsg"] == "") {
 		
-		$usr = new Helper ();
-		$salt = $usr->createSalt ();
-		$hash = $usr->saltPassword ( $_POST ['password'], $salt );
+		$salt = $helper->createSalt ();
+		$saltedPassword = $helper->saltPassword ( $salt, $_POST ['password'] );
 		
-		if ($res = $db->createUser ( $cleanData ['firstname'], $cleanData ['lastname'], 'path', 1, $cleanData ['email'], $salt, $hash )) {
+		if ($res = $db->createUser ( $cleanData ['firstname'], $cleanData ['lastname'], 'path', 1, $cleanData ['email'], $salt, $saltedPassword )) {
 			$GLOBALS ["successMsg"] .= "New User created! ID: " . $res;
 		}
 		else {

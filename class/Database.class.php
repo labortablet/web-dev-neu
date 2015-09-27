@@ -881,6 +881,9 @@ class Database extends Mysqli {
 	 */
 	public function createUser($firstname, $lastname, $profile_image = "path", $type, $email, $salt, $hash) {
 
+		$salt = hex2bin ( $salt );
+		$hash = hex2bin ( $hash );
+		
 		$query = "
         INSERT INTO `users` (
             `lastname`,
