@@ -1,6 +1,28 @@
 <?php
+global $db;
+global $self;
+global $helper;
+
 $experimentId = $args [0];
 $GLOBALS ["experimentId"] = $experimentId;
+
+$error = false;
+if (isset ( $_POST ['action'] ) && $_POST ['action'] = 'createEntryText') {
+	
+	if (! isset ( $_POST ['entryTitle'] ) || $_POST ['entryTitle'] == "") {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ['entryAttachment'] ) || $_POST ['entryAttachment'] == "") {
+		$error = true;
+	}
+	
+	if (! $error) {
+		
+		$db->createEntry ( 1, $experimentId, $self ["id"], $_POST ['entryTitle'], $_POST ['entryAttachment'] );
+		$helper->redirectToSelf ();
+	}
+}
 
 /**
  * Gets the experiment data

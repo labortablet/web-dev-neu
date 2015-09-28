@@ -568,6 +568,42 @@ class Database extends Mysqli {
 	}
 
 	/**
+	 * Create entry
+	 *
+	 * TODO Restrict query to experiments the user has rights to
+	 *
+	 * @param int $entryType        	
+	 * @param int $experimentId        	
+	 * @param int $userId        	
+	 * @param string $entryTitle        	
+	 * @param string $entryAttachment        	
+	 * @return boolean
+	 */
+	public function createEntry($entryType, $experimentId, $userId, $entryTitle, $entryAttachment) {
+
+		global $helper;
+		
+		$query = "
+			INSERT INTO `entries` (`id`, `title`, `date`, `date_user`, `attachment`, `attachment_type`, `user_id`, `expr_id`, `current_time`)
+				VALUES (
+					NULL,
+					'{$entryTitle}',
+					'{$helper->now()}',
+					'{$helper->now()}',
+					'{$entryAttachment}',
+					'{$entryType}',
+					'{$userId}',
+					'{$experimentId}',
+					'{$helper->now()}'
+				);";
+		
+		$result = $this->processInsertQuery ( $query );
+		
+		return $result;
+	
+	}
+
+	/**
 	 * Get experiment Information
 	 *
 	 * @param int $experimentId        	

@@ -62,13 +62,21 @@ $entries = getEntries ();
 					<h4 class="modal-title">Create Text Entry</h4>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-					<p><input class="form-control" type="text" name="entryTitle" placeholder="Entry Title" /></p>
-					<p><textarea class="form-control" rows="4"  name="entryAttachment" placeholder="Entry Data"></textarea></p>
+					<form action="" method="POST" style="display: inline;">
+						<p>
+							<input class="form-control" type="text" name="entryTitle"
+								placeholder="Entry Title" required />
+						</p>
+						<p>
+							<textarea class="form-control" rows="4" name="entryAttachment"
+								placeholder="Entry Data" required></textarea>
+						</p>
+				
 				</div>
 				<div class="modal-footer">
-					<form action="" method="POST" style="display: inline;">
-						<input type="hidden" name="action" value="createEntryText" /> <input
-							type="submit" class="btn btn-primary" value="Create Entry" />
+
+					<input type="hidden" name="action" value="createEntryText" /> <input
+						type="submit" class="btn btn-primary" value="Create Entry" />
 					</form>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
