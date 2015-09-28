@@ -12,7 +12,7 @@ $nav->addItem ( new NavBarItem ( "My Profile", PROJECT_ROOT . "/me", "" ) );
 // $nav->addItem ( new NavBarItem ( "Groups", PROJECT_ROOT . "/group/my", "" ) );
 
 // PROJECTS
-$nav->addItem ( new NavBarItem ( "Projects", PROJECT_ROOT. "/project/my", "" ) );
+$nav->addItem ( new NavBarItem ( "Projects", PROJECT_ROOT . "/project/my", "" ) );
 
 // ADMIN
 if (isAdmin () || GODMODE) {
@@ -28,6 +28,8 @@ if (isAdmin () || GODMODE) {
 	$dropDown->addItem ( new NavHeader ( "Projects" ) );
 	$dropDown->addItem ( new NavBarItem ( "All Projects", PROJECT_ROOT . "/project/overview", "" ) );
 	$dropDown->addItem ( new NavBarItem ( "New Project", PROJECT_ROOT . "/project/create", "" ) );
+	$dropDown->addItem ( $separator );
+	$dropDown->addItem ( new NavBarItem ( "Settings", PROJECT_ROOT . "/settings", "" ) );
 	$nav->addItem ( $dropDown );
 }
 

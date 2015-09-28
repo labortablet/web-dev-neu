@@ -4,7 +4,7 @@
  *
  * @author Andre Beging
  *        
- *         Project Controller Class
+ *         About Controller Class
  *        
  */
 class About_Controller extends Controller {

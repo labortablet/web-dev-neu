@@ -4,7 +4,7 @@
  *
  * @author Andre Beging
  *        
- *         Project Controller Class
+ *         Experiment Controller Class
  *        
  */
 class Experiment_Controller extends Controller {
