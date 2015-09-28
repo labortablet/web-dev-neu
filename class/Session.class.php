@@ -17,18 +17,15 @@ class Session extends SessionHandler {
 		}
 	
 	}
-	
-	// is user logged in?
+
+	/**
+	 * Checks if a stored session is (still) valid by the challenge token stored inside the database
+	 *
+	 * @return boolean
+	 */
 	public function isValid() {
-		
-		/*
-		 * $sessionid = User::generateUUID().User::generateUUID(); var_dump("sessionid ".$sessionid); $challenge = hash('sha256',session_id().$sessionid); $challenge = substr($challenge, 16, 32); var_dump("challenge ".$challenge);
-		 */
-        
-        /*$_SESSION['userid'] = 5;
-        $_SESSION['sessionid'] = "91929722250d4399da70995cb6c84d6f";*/
-        
-        if (! isset ( $_SESSION ['userid'] ) || $_SESSION ['userid'] == '') {
+
+		if (! isset ( $_SESSION ['userid'] ) || $_SESSION ['userid'] == '') {
 			return false;
 		}
 		
@@ -49,15 +46,6 @@ class Session extends SessionHandler {
 		if ($dbChallenge == $calcChallenge) {
 			return true;
 		}
-	
-	}
-
-	/**
-	 * TODO notwendig???
-	 */
-	public function getSelf() {
-
-		var_dump ( $_SESSION );
 	
 	}
 

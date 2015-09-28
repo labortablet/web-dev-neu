@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Build the about content from the template in views/about/about.txt
+ * 
+ * @return string
+ */
 function buildAbout() {
 
 	$aboutContent = file_get_contents ( "views/about/about.txt" );

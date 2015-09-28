@@ -395,9 +395,6 @@ class Database extends Mysqli {
 		$password = hex2bin ( $password );
 		$salt = hex2bin ( $salt );
 		
-		// var_dump("INSERT SALT",$salt);
-		// var_dump("INSERT PW", $password);
-		
 		$password = $this->real_escape_string ( $password );
 		$salt = $this->real_escape_string ( $salt );
 		
@@ -551,6 +548,12 @@ class Database extends Mysqli {
 	
 	}
 
+	/**
+	 * Get entries by experiment id
+	 *
+	 * @param int $experimentId        	
+	 * @return Ambigous <multitype:, multitype:>
+	 */
 	public function getEntries($experimentId) {
 
 		$entries = $this->processSelectQuery ( "
@@ -564,6 +567,12 @@ class Database extends Mysqli {
 	
 	}
 
+	/**
+	 * Get experiment Information
+	 *
+	 * @param int $experimentId        	
+	 * @return Ambigous <>
+	 */
 	public function getExperiment($experimentId) {
 
 		$experiment = $this->processSelectQuery ( "
@@ -575,6 +584,13 @@ class Database extends Mysqli {
 	
 	}
 
+	/**
+	 * Get all experiments a user can access
+	 *
+	 * @param int $userId        	
+	 * @param int $excludeExperiment        	
+	 * @return Ambigous <multitype:, multitype:>
+	 */
 	public function getUserExperiments($userId, $excludeExperiment = 0) {
 
 		$experiments = $this->processSelectQuery ( "
@@ -591,6 +607,13 @@ class Database extends Mysqli {
 	
 	}
 
+	/**
+	 * Checks if a user can access a certain experiment
+	 *
+	 * @param int $userId        	
+	 * @param int $experimentId        	
+	 * @return boolean
+	 */
 	public function canAccessExperiment($userId, $experimentId) {
 
 		$canAccess = $this->processSelectQuery ( "
@@ -603,7 +626,7 @@ class Database extends Mysqli {
 			WHERE u.id = '{$userId}' AND ex.id = '{$experimentId}'		
 		" );
 		
-		return $canAccess [0] ["count"];
+		return ($canAccess [0] ["count"] >= 1);
 	
 	}
 

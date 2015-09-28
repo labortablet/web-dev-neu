@@ -17,6 +17,7 @@ class App {
 
 		global $self;
 		global $db;
+		global $session;
 		
 		$url = $this->parseUrl ();
 		
@@ -31,7 +32,6 @@ class App {
 		}
 		
 		// session handling
-		$session = new Session ();
 		
 		if (! $session->isValid ()) {
 			$this->loginCall ();

@@ -65,6 +65,11 @@ function getExperiments($projectId) {
 
 }
 
+/**
+ * Get experiments created by a user
+ *
+ * @param int $experimentToExclude        	
+ */
 function getUserExperiments($experimentToExclude) {
 
 	global $db;

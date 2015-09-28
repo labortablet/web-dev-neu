@@ -27,6 +27,9 @@ function getEntries() {
 /**
  * Renders the attachment depending on its type
  *
+ * Type 1 = text
+ * Type 2 = table
+ *
  * @param string $data        	
  * @param string $type        	
  * @return string (Un)rendered attachment
@@ -34,6 +37,8 @@ function getEntries() {
 function renderEntryAttachment($data, $type) {
 
 	switch ($type) {
+		case "1" :
+			return $data;
 		case "2" :
 			return renderEntryTable ( $data );
 			break;

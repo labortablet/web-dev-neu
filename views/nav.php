@@ -1,6 +1,7 @@
 <?php
 global $self;
 global $nav;
+global $session;
 // $nav = new Navigation ();
 // var_dump($nav->build());
 // var_dump($nav->db->getUserType(35));
@@ -31,8 +32,6 @@ global $nav;
 		<!-- /.navbar-collapse -->
             
 												 
-
-												
 												<?php
 												
 												else :

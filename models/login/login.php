@@ -2,12 +2,22 @@
 global $db;
 global $helper;
 
+/**
+ * Returns the success message
+ *
+ * @return string
+ */
 function successMsg() {
 
 	return $GLOBALS ["successMsg"];
 
 }
 
+/**
+ * Returns the error message
+ *
+ * @return string
+ */
 function errorMsg() {
 
 	return $GLOBALS ["errorMsg"];

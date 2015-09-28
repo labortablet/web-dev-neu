@@ -26,7 +26,7 @@ spl_autoload_register ( '__autoload' );
 $GLOBALS ["db"] = new Database ();
 
 session_start ();
-$session = new Session ();
+$GLOBALS ["session"] = new Session ();
 $GLOBALS ["nav"] = new Navigation ();
 $GLOBALS ["helper"] = new Helper ();
 $app = new App ();

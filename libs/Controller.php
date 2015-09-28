@@ -30,6 +30,12 @@ class Controller {
 	
 	}
 
+	/**
+	 * Default function if a non-exist method is called
+	 *
+	 * @param unknown $name        	
+	 * @param unknown $args        	
+	 */
 	public function __call($name, $args) {
 
 		if (! method_exists ( $this, $this->defaultMethod )) {
