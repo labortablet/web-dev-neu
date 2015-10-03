@@ -20,9 +20,7 @@
 				</tr>
 				<tr>
 					<td>upload</td>
-					<td><?php echo (is_writable("upload") ? "YES" : "NO");?></td>
-
-
+					<td><strong style="color: <?php echo (is_writable("upload") ? "green;\">YES" : "red;\">NO");?></strong></td>
 				</tr>
 			</table>
 		</div>
