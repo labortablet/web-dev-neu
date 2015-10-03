@@ -2,7 +2,7 @@
 
 /**
  * Build the about content from the template in views/about/about.txt
- * 
+ *
  * @return string
  */
 function buildAbout() {

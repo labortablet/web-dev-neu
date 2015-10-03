@@ -20,7 +20,8 @@ $entries = getEntries ();
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				<li><a href="#" data-toggle="modal" data-target="#createEntryText">Text</a></li>
-				<li><a href="#">Table</a></li>
+				<li><a href="#" data-toggle="modal"
+					data-target="#prepareModalEntryTable">Table</a></li>
 			</ul>
 		</div>
 		
@@ -74,10 +75,88 @@ $entries = getEntries ();
 				
 				</div>
 				<div class="modal-footer">
-
-					<input type="hidden" name="action" value="createEntryText" /> <input
-						type="submit" class="btn btn-primary" value="Create Entry" />
+					<input type="hidden" name="asd" value="sdf" /> <input type="hidden"
+						name="action" value="createEntryText" /> <input type="submit"
+						class="btn btn-primary" value="Create Entry" />
 					</form>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Table Entry Modal -->
+	<div id="createEntryTable" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create Table Entry</h4>
+				</div>
+				<div class="modal-body" id="entryTableBody"
+					style="text-align: center;">Empty</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary"
+						onclick="document.createEntryTableForm.submit();">Create Entry</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Prepare Table Entry Modal Modal -->
+	<div id="prepareModalEntryTable" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create Table Entry</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<form name="prepareEntryTableForm" style="display: inline;">
+						<table class="table">
+							<tr>
+								<td>
+									<p>Rows:</p> <select class="form-control" id="createTableRows">
+										<?php
+										for($i = 1; $i <= 20; $i ++) :
+											?>
+										<option><?php echo $i; ?></option>
+										<?php
+										endfor
+										;
+										?>
+									</select>
+								</td>
+								<td>
+									<p>Columns:</p> <select class="form-control"
+									id="createTableColumns">
+										<?php
+										for($i = 1; $i <= 20; $i ++) :
+											?>
+										<option><?php echo $i; ?></option>
+										<?php
+										endfor
+										;
+										?>
+									</select>
+								</td>
+							</tr>
+						</table>
+				
+				</div>
+				<div class="modal-footer">
+
+					<input type="submit" class="btn btn-primary" value="Create Entry" />
+					</form>
+
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>

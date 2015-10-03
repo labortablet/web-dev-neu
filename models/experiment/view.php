@@ -7,7 +7,7 @@ $experimentId = $args [0];
 $GLOBALS ["experimentId"] = $experimentId;
 
 $error = false;
-if (isset ( $_POST ['action'] ) && $_POST ['action'] = 'createEntryText') {
+if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'createEntryText') {
 	
 	if (! isset ( $_POST ['entryTitle'] ) || $_POST ['entryTitle'] == "") {
 		$error = true;
@@ -22,6 +22,41 @@ if (isset ( $_POST ['action'] ) && $_POST ['action'] = 'createEntryText') {
 		$db->createEntry ( 1, $experimentId, $self ["id"], $_POST ['entryTitle'], $_POST ['entryAttachment'] );
 		$helper->redirectToSelf ();
 	}
+}
+
+if (isset ( $_POST ["action"] ) && $_POST ["action"] == "createEntryTable") {
+	
+	if (! isset ( $_POST ['entryTitle'] ) || $_POST ['entryTitle'] == "") {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ['rowCount'] ) || ! is_numeric ( $_POST ['rowCount'] )) {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ['colCount'] ) || ! is_numeric ( $_POST ['colCount'] )) {
+		$error = true;
+	}
+	
+	if (! $error) {
+		$attachmentString = "";
+		for($r = 1; $r <= $_POST ['rowCount']; $r ++) {
+			for($c = 1; $c <= $_POST ['colCount']; $c ++) {
+				$attachmentString .= @$_POST ["R{$r}C{$c}"];
+				if ($c < $_POST ['colCount']) {
+					$attachmentString .= ",";
+				}
+			}
+			if ($r < $_POST ['rowCount']) {
+				$attachmentString .= ";";
+			}
+		}
+		
+		$db->createEntry ( 2, $experimentId, $self ["id"], $_POST ['entryTitle'], $attachmentString );
+		$helper->redirectToSelf ();
+	
+	}
+
 }
 
 /**
