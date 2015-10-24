@@ -28,12 +28,25 @@ global $session;
 			<?php
 													echo $nav->build ();
 													?>
+													<div>
+				<form class="navbar-form navbar-left" role="search"
+					action="<?php echo PROJECT_ROOT . "/search"; ?>">
+					<div class="form-group">
+						<input type="text" name="s" class="form-control"
+							placeholder="Search">
+					</div>
+					<span class="hidden-xs"><button type="submit"
+							class="btn btn-default">Submit</button></span>
+				</form>
+			</div>
 		</div>
 		<!-- /.navbar-collapse -->
             
 												 
-												<?php
 												
+												 
+												 <?php
+
 												else :
 													?>
             <!-- Collect the nav links, forms, and other content for toggling -->

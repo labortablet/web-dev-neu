@@ -7,13 +7,10 @@
  *        
  */
 class Database extends Mysqli {
-
 	public function __construct() {
-
 		parent::__construct ( DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, NULL );
-	
 	}
-
+	
 	/**
 	 * Get a single user by id from database
 	 *
@@ -22,7 +19,6 @@ class Database extends Mysqli {
 	 * @return Array with user data
 	 */
 	public function getUser($userId) {
-
 		$result = $this->processSelectQuery ( "SELECT * FROM `users` WHERE id = '{$userId}'" );
 		
 		if (count ( $result ) == 0) {
@@ -30,9 +26,8 @@ class Database extends Mysqli {
 		}
 		
 		return $result [0];
-	
 	}
-
+	
 	/**
 	 * Checks if a user is admin
 	 *
@@ -40,21 +35,18 @@ class Database extends Mysqli {
 	 * @return boolean
 	 */
 	public function isAdmin($userId) {
-
 		if ($this->getUserType ( $userId ) == 2) {
 			return true;
 		}
 		return false;
-	
 	}
-
+	
 	/**
 	 * Get group information by group id
 	 *
 	 * @param int $groupId        	
 	 */
 	public function getGroup($groupId) {
-
 		$result = $this->processSelectQuery ( "SELECT * FROM `groups` WHERE id = '{$groupId}'" );
 		
 		if (count ( $result ) == 0) {
@@ -62,16 +54,14 @@ class Database extends Mysqli {
 		}
 		
 		return $result [0];
-	
 	}
-
+	
 	/**
 	 * Get project information by group id
 	 *
 	 * @param int $projectId        	
 	 */
 	public function getProject($projectId) {
-
 		$result = $this->processSelectQuery ( "SELECT * FROM `projects` WHERE id = '{$projectId}'" );
 		
 		if (count ( $result ) == 0) {
@@ -79,9 +69,8 @@ class Database extends Mysqli {
 		}
 		
 		return $result [0];
-	
 	}
-
+	
 	/**
 	 * Returns the user type by user id
 	 *
@@ -90,7 +79,6 @@ class Database extends Mysqli {
 	 * @return int userType
 	 */
 	public function getUserType($userId) {
-
 		if (! $userId) {
 			return null;
 		}
@@ -107,9 +95,8 @@ class Database extends Mysqli {
 		$type = $type ['type'];
 		
 		return $type;
-	
 	}
-
+	
 	/**
 	 *
 	 * @todo reduce return to hash
@@ -121,7 +108,6 @@ class Database extends Mysqli {
 	 * @return array Password Hash
 	 */
 	public function getHashByEMail($email) {
-
 		$result = $this->processSelectQuery ( "SELECT id, email, salt, hash_password FROM `users` WHERE email = '{$email}'" );
 		
 		if (count ( $result ) == 0) {
@@ -137,9 +123,8 @@ class Database extends Mysqli {
 		}
 		
 		return $result [0];
-	
 	}
-
+	
 	/**
 	 *
 	 * @todo reduce return to challenge id
@@ -153,14 +138,12 @@ class Database extends Mysqli {
 	 * @return array Challenge ID
 	 */
 	public function getChallenge($sessionId, $userId) {
-
 		$result = $this->processSelectQuery ( "
 				SELECT HEX(challenge) as challenge FROM `sessions` WHERE HEX(id) = '{$sessionId}' AND `user_id` = '{$userId}' AND `authorized` = 1" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 *
 	 * @todo Disable users old sessions in database
@@ -175,7 +158,6 @@ class Database extends Mysqli {
 	 *        	Challenge ID
 	 */
 	public function insertSession($userId, $sessionId, $challenge) {
-
 		$this->processInsertQuery ( "UPDATE `sessions` SET `authorized` = 0 WHERE `user_id` = '{$userId}'" );
 		
 		$id = $this->processInsertQuery ( "
@@ -195,9 +177,8 @@ class Database extends Mysqli {
                 '{$userId}',
                 '1'
                 );" );
-	
 	}
-
+	
 	/**
 	 * Updates the users name and type
 	 *
@@ -208,13 +189,11 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function updateUserSettings($userId, $firstName, $lastName, $type) {
-
 		$result = $this->processInsertQuery ( "UPDATE users SET lastname = '{$lastName}', firstname = '{$firstName}', type = '{$type}' WHERE id = {$userId};" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Updates the groups name and description
 	 *
@@ -224,13 +203,11 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function updateGroupSettings($groupId, $name, $description) {
-
 		$result = $this->processInsertQuery ( "UPDATE groups SET name = '{$name}', description = '{$description}' WHERE id = {$groupId};" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Updates the projects name and description
 	 *
@@ -240,13 +217,11 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function updateProjectSettings($projectId, $name, $description) {
-
 		$result = $this->processInsertQuery ( "UPDATE projects SET name = '{$name}', description = '{$description}' WHERE id = {$projectId};" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Removes a user from database
 	 *
@@ -254,13 +229,11 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function deleteUser($userId) {
-
 		$this->processInsertQuery ( "UPDATE `sessions` SET `user_id` = NULL WHERE user_id = {$userId};" );
 		$this->processInsertQuery ( "DELETE FROM `users_groups` WHERE `user_id` = {$userId}" );
 		$this->processInsertQuery ( "DELETE FROM `users` WHERE `id` = {$userId}" );
-	
 	}
-
+	
 	/**
 	 * Removes a user from a group
 	 *
@@ -269,13 +242,11 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function removeUserFromGroup($groupId, $userId) {
-
 		$result = $this->processInsertQuery ( "DELETE FROM users_groups WHERE user_id = {$userId} AND group_id = {$groupId}" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Removes a project from a group
 	 *
@@ -284,13 +255,11 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function removeProjectFromGroup($groupId, $projectId) {
-
 		$result = $this->processInsertQuery ( "DELETE FROM projects_groups WHERE project_id = {$projectId} AND group_id = {$groupId}" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Deletes a group from the database
 	 *
@@ -298,15 +267,13 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function deleteGroup($groupId) {
-
 		$this->processInsertQuery ( "DELETE FROM `projects_groups` WHERE `group_id` = {$groupId}" );
 		$this->processInsertQuery ( "DELETE FROM `users_groups` WHERE `group_id` = {$groupId}" );
 		$result = $this->processInsertQuery ( "DELETE FROM groups WHERE id = {$groupId};" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Deletes a project from the database
 	 *
@@ -314,15 +281,13 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function deleteProject($projectId) {
-
 		$this->processInsertQuery ( "DELETE FROM experiments WHERE project_id = {$projectId};" );
 		
 		$this->processInsertQuery ( "DELETE FROM projects_groups WHERE project_id = {$projectId};" );
 		
 		$this->processInsertQuery ( "DELETE FROM projects WHERE id = {$projectId};" );
-	
 	}
-
+	
 	/**
 	 * Adds a user to a group
 	 *
@@ -330,7 +295,6 @@ class Database extends Mysqli {
 	 * @param int $userId        	
 	 */
 	public function addUserToGroup($groupId, $userId) {
-
 		$query = "
 				INSERT INTO users_groups (id, user_id, group_id, dateInOut, status)
 				VALUES (NULL, '{$userId}', '{$groupId}', CURRENT_TIMESTAMP, '1');
@@ -341,14 +305,12 @@ class Database extends Mysqli {
 			
 			if ($this->error == '') {
 				return $stmt->insert_id;
-			}
-			else {
+			} else {
 				return $this->error;
 			}
 		}
-	
 	}
-
+	
 	/**
 	 * Adds a project to a group
 	 *
@@ -356,7 +318,6 @@ class Database extends Mysqli {
 	 * @param int $projectId        	
 	 */
 	public function addProjectToGroup($groupId, $projectId) {
-
 		$query = "
 		INSERT INTO projects_groups (id, project_id, group_id, create_date)
 		VALUES (NULL, '{$projectId}', '{$groupId}', CURRENT_TIMESTAMP);
@@ -367,14 +328,12 @@ class Database extends Mysqli {
 			
 			if ($this->error == '') {
 				return $stmt->insert_id;
-			}
-			else {
+			} else {
 				return $this->error;
 			}
 		}
-	
 	}
-
+	
 	/**
 	 * Changes the password of an existing user
 	 *
@@ -387,7 +346,6 @@ class Database extends Mysqli {
 	 * @return mixed
 	 */
 	public function updatePassword($userId, $password, $salt) {
-
 		if (strlen ( $password ) != 64) {
 			return false;
 		}
@@ -402,21 +360,16 @@ class Database extends Mysqli {
 		
 		if ($result === 0) {
 			return true;
-		}
-		elseif ($result == false || $result == null) {
+		} elseif ($result == false || $result == null) {
 			
 			return false;
 		}
 		return true;
-	
 	}
-
 	public function verifyPassword($email, $password) {
-
 		return 0;
-	
 	}
-
+	
 	/**
 	 * Get all users
 	 *
@@ -425,7 +378,6 @@ class Database extends Mysqli {
 	 * @return array User list
 	 */
 	public function getUsers($limit = null) {
-
 		$query = "SELECT * FROM users LIMIT {$limit}";
 		$result = $this->query ( $query );
 		$tmpresult = array ();
@@ -435,9 +387,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets users that are not member of the given group
 	 *
@@ -445,7 +396,6 @@ class Database extends Mysqli {
 	 * @return multitype:
 	 */
 	public function getUsersNotInGroup($groupId) {
-
 		$query = "
 			SELECT *
 			FROM users
@@ -463,9 +413,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets projects that are not assigned with the given group
 	 *
@@ -473,7 +422,6 @@ class Database extends Mysqli {
 	 * @return multitype:
 	 */
 	public function projectsNotInGroup($groupId) {
-
 		$query = "
 		SELECT *
 		FROM projects
@@ -491,16 +439,14 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets all groups including numbers of assigned users and projects
 	 *
 	 * @return multitype:
 	 */
 	public function getGroups() {
-
 		$query = "
 			SELECT g.id, g.name, g.description, g.create_date, COALESCE(projects,0) AS projects, COALESCE(users,0) AS users FROM groups g
 			LEFT JOIN (
@@ -526,9 +472,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Get experiments by a given project id
 	 *
@@ -536,7 +481,6 @@ class Database extends Mysqli {
 	 * @return Ambigous <multitype:, multitype:>
 	 */
 	public function getExperiments($projectId, $userId = 0) {
-
 		$experiments = $this->processSelectQuery ( "
 			SELECT ex.id, ex.name, ex.description, ex.create_date, COALESCE(en.entries,0) AS entries, COALESCE(enme.entries,0) AS entries_me
 			FROM `experiments` ex
@@ -545,9 +489,8 @@ class Database extends Mysqli {
 			WHERE `project_id` = '{$projectId}'" );
 		
 		return $experiments;
-	
 	}
-
+	
 	/**
 	 * Get entries by experiment id
 	 *
@@ -555,7 +498,6 @@ class Database extends Mysqli {
 	 * @return Ambigous <multitype:, multitype:>
 	 */
 	public function getEntries($experimentId) {
-
 		$entries = $this->processSelectQuery ( "
 			SELECT en.id, en.title, en.attachment, en.attachment_type, u.firstname, u.lastname, en.date
 			FROM  `entries` en
@@ -564,9 +506,8 @@ class Database extends Mysqli {
 			ORDER BY `date` DESC" );
 		
 		return $entries;
-	
 	}
-
+	
 	/**
 	 * Create entry
 	 *
@@ -580,7 +521,6 @@ class Database extends Mysqli {
 	 * @return boolean
 	 */
 	public function createEntry($entryType, $experimentId, $userId, $entryTitle, $entryAttachment) {
-
 		global $helper;
 		
 		$query = "
@@ -600,9 +540,8 @@ class Database extends Mysqli {
 		$result = $this->processInsertQuery ( $query );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Get experiment Information
 	 *
@@ -610,16 +549,14 @@ class Database extends Mysqli {
 	 * @return Ambigous <>
 	 */
 	public function getExperiment($experimentId) {
-
 		$experiment = $this->processSelectQuery ( "
 			SELECT ex.id, ex.name, ex.description, ex.create_date, ex.project_id, p.name as project_name FROM `experiments` ex
 			INNER JOIN `projects` p ON p.id = ex.project_id
 			WHERE ex.id = {$experimentId}" );
 		
 		return $experiment [0];
-	
 	}
-
+	
 	/**
 	 * Get all experiments a user can access
 	 *
@@ -628,7 +565,6 @@ class Database extends Mysqli {
 	 * @return Ambigous <multitype:, multitype:>
 	 */
 	public function getUserExperiments($userId, $excludeExperiment = 0) {
-
 		$experiments = $this->processSelectQuery ( "
 			SELECT ex.id, ex.name experiment_name, p.name project_name
 			FROM  `groups` g
@@ -640,9 +576,8 @@ class Database extends Mysqli {
 		" );
 		
 		return $experiments;
-	
 	}
-
+	
 	/**
 	 * Checks if a user can access a certain experiment
 	 *
@@ -651,7 +586,6 @@ class Database extends Mysqli {
 	 * @return boolean
 	 */
 	public function canAccessExperiment($userId, $experimentId) {
-
 		$canAccess = $this->processSelectQuery ( "
 			SELECT count(*) as count
 			FROM `users` u
@@ -663,9 +597,8 @@ class Database extends Mysqli {
 		" );
 		
 		return ($canAccess [0] ["count"] >= 1);
-	
 	}
-
+	
 	/**
 	 * Delete experiment and move its entries to another experiment
 	 *
@@ -673,12 +606,10 @@ class Database extends Mysqli {
 	 * @param int $moveEntriesTo        	
 	 */
 	public function deleteExperiment($experimentId, $moveEntriesTo) {
-
 		$this->processInsertQuery ( "UPDATE entries SET expr_id = '{$moveEntriesTo}' WHERE expr_id = {$experimentId};" );
 		$this->processInsertQuery ( "DELETE FROM `experiments` WHERE `id` = '{$experimentId}'" );
-	
 	}
-
+	
 	/**
 	 * Create an experiment
 	 *
@@ -688,23 +619,20 @@ class Database extends Mysqli {
 	 * @return boolean
 	 */
 	public function createExperiment($projectId, $experimentName, $experimentDescription) {
-
 		$result = $this->processInsertQuery ( "
 			INSERT INTO `experiments` (`id`, `name`, `description`, `project_id`, `create_date`)
 				VALUES (NULL, '{$experimentName}', '{$experimentDescription}', '{$projectId}', CURRENT_TIMESTAMP);
 		" );
 		
 		return $result;
-	
 	}
-
+	
 	/**
 	 * Gets all projects
 	 *
 	 * @return multitype:
 	 */
 	public function getProjects() {
-
 		$query = "
 			SELECT p.id, p.name, p.description, p.create_date, COALESCE(groups,0) AS groups, COALESCE(e.experiments,0) AS experiments FROM projects p
 			LEFT JOIN (
@@ -728,9 +656,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets users that are member of the given group
 	 *
@@ -738,7 +665,6 @@ class Database extends Mysqli {
 	 * @return multitype:
 	 */
 	public function getUsersByGroup($groupId) {
-
 		$query = "
 			SELECT DISTINCT(u.id) as id, u.firstname, u.lastname, u.email
 			FROM users_groups ug
@@ -753,9 +679,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets groups that are assigned with the given project
 	 *
@@ -763,7 +688,6 @@ class Database extends Mysqli {
 	 * @return multitype:
 	 */
 	public function getGroupsByProject($projectId) {
-
 		$query = "
 		SELECT DISTINCT(g.id) as id, g.name, g.description
 		FROM projects_groups pg
@@ -778,9 +702,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets the groups that the given user is member of
 	 *
@@ -788,7 +711,6 @@ class Database extends Mysqli {
 	 * @return multitype:
 	 */
 	public function getGroupsByUser($userId) {
-
 		$query = "
 			SELECT DISTINCT(group_id) as id, name, description 
 			FROM users_groups ug
@@ -804,9 +726,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets the projects assigned with the given group
 	 *
@@ -814,7 +735,6 @@ class Database extends Mysqli {
 	 * @return multitype:
 	 */
 	public function getProjectsByGroup($groupId) {
-
 		$query = "
 			SELECT DISTINCT(p.id) as id, p.name, p.description
 			FROM projects_groups pg
@@ -829,9 +749,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Gets project that the given user is assigned with (via group)
 	 *
@@ -839,7 +758,6 @@ class Database extends Mysqli {
 	 * @return multitype: TODO hier scheint nicht alles so zu funktionieren, wie es sollte
 	 */
 	public function getProjectsByUser($userId) {
-
 		$query = "
 			SELECT p.id, p.name, p.description, p.create_date, COALESCE(e.experiments,0) AS experiments
 			FROM projects p
@@ -866,9 +784,8 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
 	/**
 	 * Create a new group
 	 *
@@ -876,7 +793,6 @@ class Database extends Mysqli {
 	 * @param string $description        	
 	 */
 	public function createGroup($name, $description) {
-
 		$query = "
 			INSERT INTO `groups` (`id`, `name`, `description`, `create_date`)
 				VALUES (NULL, '{$name}', '{$description}', CURRENT_TIMESTAMP);
@@ -887,14 +803,12 @@ class Database extends Mysqli {
 			
 			if ($this->error == '') {
 				return $stmt->insert_id;
-			}
-			else {
+			} else {
 				return $this->error;
 			}
 		}
-	
 	}
-
+	
 	/**
 	 * Create a new project
 	 *
@@ -902,7 +816,6 @@ class Database extends Mysqli {
 	 * @param string $description        	
 	 */
 	public function createProject($name, $description) {
-
 		$query = "
 		INSERT INTO `projects` (`id`, `name`, `description`, `create_date`)
 		VALUES (NULL, '{$name}', '{$description}', CURRENT_TIMESTAMP);
@@ -913,14 +826,12 @@ class Database extends Mysqli {
 			
 			if ($this->error == '') {
 				return $stmt->insert_id;
-			}
-			else {
+			} else {
 				return $this->error;
 			}
 		}
-	
 	}
-
+	
 	/**
 	 * Creates a new user
 	 *
@@ -940,7 +851,6 @@ class Database extends Mysqli {
 	 *        	Password hash
 	 */
 	public function createUser($firstname, $lastname, $profile_image = "path", $type, $email, $salt, $hash) {
-
 		$salt = hex2bin ( $salt );
 		$hash = hex2bin ( $hash );
 		
@@ -971,44 +881,43 @@ class Database extends Mysqli {
 			
 			if ($this->error == '') {
 				return $stmt->insert_id;
-			}
-			else {
+			} else {
 				return $this->error;
 			}
 		}
-	
 	}
-
+	
 	/**
-	 * Generic function to process insert and update queries
+	 * Collect search results from the single search methods
 	 *
-	 * @param string $query        	
-	 * @return boolean
+	 * @param string $searchTerm        	
+	 * @return multitype:multitype:
 	 */
-	public function processInsertQuery($query) {
-
-		if ($stmt = $this->prepare ( $query )) {
-			$stmt->execute ();
-			
-			if ($this->error == '') {
-				return $stmt->insert_id;
-			}
-			else {
-				return $this->error;
-			}
-		}
-		return false;
-	
+	public function performSearch($searchTerm) {
+		$searchResults = array ();
+		
+		$searchProjects = $this->searchProjects ( $searchTerm );
+		$searchResults ["projects"] = $searchProjects;
+		
+		$searchEntries = $this->searchEntries ( $searchTerm );
+		$searchResults ["entries"] = $searchEntries;
+		
+		return $searchResults;
 	}
-
+	
 	/**
-	 * Generic function to process select queries
+	 * Get entries by a search term, searching in entry title and attachment
 	 *
-	 * @param string $query        	
+	 * @param string $searchTerm        	
 	 * @return multitype:
 	 */
-	private function processSelectQuery($query) {
-
+	private function searchEntries($searchTerm) {
+		$query = "
+			SELECT * 
+			FROM entries
+			WHERE `title` LIKE  '%{$searchTerm}%'
+			OR `attachment` LIKE  '%{$searchTerm}%'";
+		
 		$result = $this->query ( $query );
 		$tmpresult = array ();
 		
@@ -1017,9 +926,65 @@ class Database extends Mysqli {
 		}
 		
 		return $tmpresult;
-	
 	}
-
+	
+	/**
+	 * Get projects by a search term, searching in project name and description
+	 *
+	 * @param string $searchTerm        	
+	 * @return multitype:
+	 */
+	private function searchProjects($searchTerm) {
+		$query = "
+			SELECT * FROM projects
+			WHERE `name` LIKE '%{$searchTerm}%'
+			OR `description` LIKE '%{$searchTerm}%'";
+		
+		$result = $this->query ( $query );
+		$tmpresult = array ();
+		
+		while ( $row = $result->fetch_array ( MYSQL_ASSOC ) ) {
+			array_push ( $tmpresult, $row );
+		}
+		
+		return $tmpresult;
+	}
+	
+	/**
+	 * Generic function to process insert and update queries
+	 *
+	 * @param string $query        	
+	 * @return boolean
+	 */
+	public function processInsertQuery($query) {
+		if ($stmt = $this->prepare ( $query )) {
+			$stmt->execute ();
+			
+			if ($this->error == '') {
+				return $stmt->insert_id;
+			} else {
+				return $this->error;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Generic function to process select queries
+	 *
+	 * @param string $query        	
+	 * @return multitype:
+	 */
+	private function processSelectQuery($query) {
+		$result = $this->query ( $query );
+		$tmpresult = array ();
+		
+		while ( $row = $result->fetch_array ( MYSQL_ASSOC ) ) {
+			array_push ( $tmpresult, $row );
+		}
+		
+		return $tmpresult;
+	}
 }
 
 ?>
