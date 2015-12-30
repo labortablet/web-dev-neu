@@ -22,6 +22,7 @@ $entries = getEntries ();
 				<li><a href="#" data-toggle="modal" data-target="#createEntryText">Text</a></li>
 				<li><a href="#" data-toggle="modal"
 					data-target="#prepareModalEntryTable">Table</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#createEntryImage">Image</a></li>
 			</ul>
 		</div>
 		
@@ -157,6 +158,40 @@ $entries = getEntries ();
 					<input type="submit" class="btn btn-primary" value="Create Entry" />
 					</form>
 
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Create Image Entry Modal -->
+	<div id="createEntryImage" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create Image Entry</h4>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<form action="" method="POST" style="display: inline;">
+						<p>
+							<input class="form-control" type="text" name="imageEntryTitle"
+								id="imageEntryTitle" placeholder="Entry Title" required />
+						</p>
+						<p>
+							<input class="form-control" name="entryFiles[]" id="imageEntryFiles"
+								type="file" accept="image/*" />
+						</p>
+				
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" name="action" value="createEntryImage" /> <input
+						type="submit" class="btn btn-primary" value="Create Entry"
+						onclick="uploadImageEntry('#{imageUploadUrl}',800); return false;" />
+					</form>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>

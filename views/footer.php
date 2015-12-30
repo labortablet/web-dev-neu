@@ -17,6 +17,10 @@
 <!-- Rowlink Plugin -->
 <script src="<?php echo PROJECT_ROOT; ?>/js/lablet.js"></script>
 
+<!-- Image Entry Scripts -->
+<script src="<?php echo PROJECT_ROOT; ?>/js/lablet-entryimage.js"></script>
+
+
 </body>
 
 </html>

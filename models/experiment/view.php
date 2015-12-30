@@ -6,6 +6,8 @@ global $helper;
 $experimentId = $args [0];
 $GLOBALS ["experimentId"] = $experimentId;
 
+var_dump ( $_POST );
+
 $error = false;
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'createEntryText') {
 	
@@ -54,7 +56,28 @@ if (isset ( $_POST ["action"] ) && $_POST ["action"] == "createEntryTable") {
 		
 		$db->createEntry ( 2, $experimentId, $self ["id"], $_POST ['entryTitle'], $attachmentString );
 		$helper->redirectToSelf ();
+	}
+
+}
+
+if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'createEntryImage') {
 	
+	if (! isset ( $_POST ['entryTitle'] ) || $_POST ['entryTitle'] == "") {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ['entryImageName'] ) || $_POST ['entryImageName'] == "") {
+		$error = true;
+	}
+	
+	if (! isset ( $_POST ['entryImageData'] ) || $_POST ['entryImageData'] == "") {
+		$error = true;
+	}
+	
+	if (! $error) {
+		
+		$db->createEntry ( 3, $experimentId, $self ["id"], $_POST ['entryTitle'], $_POST ['entryImageData'] );
+		$helper->redirectToSelf ();
 	}
 
 }
@@ -98,6 +121,8 @@ function renderEntryAttachment($data, $type) {
 			return $data;
 		case "2" :
 			return renderEntryTable ( $data );
+		case "3" :
+			return renderEntryImage ( $data );
 			break;
 	}
 	
@@ -130,5 +155,16 @@ function renderEntryTable($data) {
 	}
 	
 	return "<table class=\"table\">" . $output . "</table>";
+
+}
+
+/**
+ * Renders an image
+ *
+ * @param string $data        	
+ */
+function renderEntryImage($data) {
+
+	return '<img src="' . $data . '" style="max-width: 100%;">';
 
 }
