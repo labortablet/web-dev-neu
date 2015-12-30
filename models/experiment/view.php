@@ -6,8 +6,6 @@ global $helper;
 $experimentId = $args [0];
 $GLOBALS ["experimentId"] = $experimentId;
 
-var_dump ( $_POST );
-
 $error = false;
 if (isset ( $_POST ['action'] ) && $_POST ['action'] == 'createEntryText') {
 	
@@ -102,6 +100,28 @@ function getEntries() {
 	global $experimentId;
 	return $db->getEntries ( $experimentId );
 
+}
+
+/**
+ * Get entry type description by type id
+ * 
+ * @param string $type
+ * @return string
+ */
+function getEntryTypeName($type) {
+	
+	switch ($type) {
+		case "1" :
+			return "Text";
+		case "2" :
+			return "Table";
+		case "3" :
+			return "Image";
+			break;
+	}
+	
+	return $type;
+	
 }
 
 /**

@@ -40,7 +40,7 @@ $entries = getEntries ();
 							</h3>
 				Created by <?php echo "{$en["firstname"]} {$en["lastname"]} on {$en["date"]}";?></a>
 					</h4>
-					(Type <?php echo $en["attachment_type"]; ?>)
+					(<?php echo getEntryTypeName($en["attachment_type"]); ?>)
 				</div>
 				<div id="collapse<?php echo $en["id"]; ?>"
 					class="panel-collapse collapse" role="tabpanel"
