@@ -16,7 +16,8 @@ $entries = getEntries ();
 			<button class="btn btn-primary dropdown-toggle" type="button"
 				id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="true">
-				Create Entry <span class="caret"></span>
+				<span class="glyphicon glyphicon-new-window"></span> Create Entry <span
+					class="caret"></span>
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				<li><a href="#" data-toggle="modal" data-target="#createEntryText">Text</a></li>
@@ -182,8 +183,8 @@ $entries = getEntries ();
 								id="imageEntryTitle" placeholder="Entry Title" required />
 						</p>
 						<p>
-							<input class="form-control" name="entryFiles[]" id="imageEntryFiles"
-								type="file" accept="image/*" />
+							<input class="form-control" name="entryFiles[]"
+								id="imageEntryFiles" type="file" accept="image/*" />
 						</p>
 				
 				</div>

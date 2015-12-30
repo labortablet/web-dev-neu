@@ -12,7 +12,9 @@ $groups = getGroups ();
 			<tr>
 				<td style="width: 100%; padding: 10px;"><button style="width: 100%;"
 						class="btn btn-danger" data-toggle="modal"
-						data-target="#deleteProject">Delete Project</button></td>
+						data-target="#deleteProject">
+						<span class="glyphicon glyphicon-trash"></span> Delete
+					</button></td>
 			</tr>
 		</table>
 		<h2>Edit</h2>
@@ -34,9 +36,11 @@ $groups = getGroups ();
 </textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="padding: 3px;"><input
-						class="btn btn-primary" type="submit" style="width: 100%;"
-						value="Save settings" /></td>
+					<td colspan="2" style="padding: 3px;">
+						<button class="btn btn-primary" type="submit" style="width: 100%;">
+							<span class="glyphicon glyphicon-floppy-disk"></span> Save
+						</button>
+					</td>
 				</tr>
 			</table>
 		</form>

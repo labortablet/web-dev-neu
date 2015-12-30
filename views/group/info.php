@@ -16,7 +16,9 @@ $projectsNotInGroup = projectsNotInGroup ();
 			<tr>
 				<td style="width: 100%; padding: 10px;"><button style="width: 100%;"
 						class="btn btn-danger" data-toggle="modal"
-						data-target="#deleteGroup">Delete Group</button></td>
+						data-target="#deleteGroup">
+						<span class="glyphicon glyphicon-trash"></span> Delete Group
+					</button></td>
 			</tr>
 		</table>
 		<h2>Edit</h2>
@@ -38,9 +40,11 @@ $projectsNotInGroup = projectsNotInGroup ();
 </textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="padding: 3px;"><input
-						class="btn btn-primary" type="submit" style="width: 100%;"
-						value="Save settings" /></td>
+					<td colspan="2" style="padding: 3px;">
+						<button class="btn btn-primary" type="submit" style="width: 100%;">
+							<span class="glyphicon glyphicon-floppy-disk"></span> Save
+						</button>
+					</td>
 				</tr>
 			</table>
 		</form>
@@ -62,7 +66,9 @@ $projectsNotInGroup = projectsNotInGroup ();
 				<td style="padding: 3px;"><?php echo $u["email"]; ?></td>
 				<td style="padding: 3px; width: 1px;" class="rowlink-skip"><button
 						class="btn btn-danger" data-toggle="modal"
-						data-target="#removeUser<?php echo $u["id"]; ?>">Remove</button></td>
+						data-target="#removeUser<?php echo $u["id"]; ?>">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button></td>
 			</tr>
 	        <?php
 									endforeach
@@ -107,7 +113,9 @@ $projectsNotInGroup = projectsNotInGroup ();
 
 				<td style="padding: 3px; width: 1px;" class="rowlink-skip"><button
 						class="btn btn-danger" data-toggle="modal"
-						data-target="#removeProject<?php echo $p["id"]; ?>">Remove</button></td>
+						data-target="#removeProject<?php echo $p["id"]; ?>">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button></td>
 
 			</tr>
 	        <?php

@@ -19,7 +19,8 @@ global $db;
 						password</a></td>
 				<td style="width: 50%; padding: 10px;"><button style="width: 100%;"
 						class="btn btn-danger" data-toggle="modal"
-						data-target="#deleteUser">Delete</button></td>
+						data-target="#deleteUser">
+						<span class="glyphicon glyphicon-trash"></span> Delete</button></td>
 			</tr>
 		</table>
 		<h2>Edit</h2>
@@ -55,9 +56,9 @@ global $db;
 					</select></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="padding: 3px;"><input
-						class="btn btn-primary" type="submit" style="width: 100%;"
-						value="Save settings" /></td>
+					<td colspan="2" style="padding: 3px;">
+						<button class="btn btn-primary"  style="width: 100%;" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+</td>
 				</tr>
 			</table>
 		</form>

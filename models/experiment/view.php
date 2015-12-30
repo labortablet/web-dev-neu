@@ -129,6 +129,7 @@ function getEntryTypeName($type) {
  *
  * Type 1 = text
  * Type 2 = table
+ * Type 3 = image
  *
  * @param string $data        	
  * @param string $type        	

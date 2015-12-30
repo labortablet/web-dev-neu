@@ -29,14 +29,15 @@ $projects = getProjects ();
 			<div class="panel-body">
 				<div style="text-align: center; margin: 0px 0px 15px 0px;">
 					<button class="btn btn-primary" data-toggle="modal"
-						data-target="#createExperiment<?php echo $p ["id"]; ?>">New
+						data-target="#createExperiment<?php echo $p ["id"]; ?>"><span class="glyphicon glyphicon-new-window"></span> New
 						Experiment</button>
 				</div>
 			<?php
 						foreach ( $experiments as $ex ) :
 							?>
 				<div class="well experiment">
-					<a href="<?php echo PROJECT_ROOT."/experiment/".$ex["id"];?>"><span class="experimentLink"></span></a>
+					<a href="<?php echo PROJECT_ROOT."/experiment/".$ex["id"];?>"><span
+						class="experimentLink"></span></a>
 					Experiment: <?php echo $ex["name"];?>
 					<p>
 						<small><?php echo $ex["description"];?></small>
@@ -47,12 +48,13 @@ $projects = getProjects ();
 					</ul>
 					<div class="delete-button-xs visible-xs">
 						<button class="btn btn-danger" data-toggle="modal"
-							data-target="#deleteExperiment<?php echo $ex["id"]; ?>">Delete
-							Experiment</button>
+							data-target="#deleteExperiment<?php echo $ex["id"]; ?>"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 					</div>
 					<div class="delete-button-sm hidden-xs">
 						<button class="btn btn-danger" data-toggle="modal"
-							data-target="#deleteExperiment<?php echo $ex["id"]; ?>">Delete</button>
+							data-target="#deleteExperiment<?php echo $ex["id"]; ?>">
+							<span class="glyphicon glyphicon-trash"></span> Delete
+						</button>
 					</div>
 				</div>
 			<?php
